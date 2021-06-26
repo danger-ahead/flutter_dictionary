@@ -30,9 +30,15 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_launcher_name: ^0.0.1
+  flutter_launcher_icons: ^0.8.0
 
 flutter_launcher_name:
   name: "Dictionary"
+
+flutter_icons:
+  android: true
+  ios: true
+  image_path: "images/icon.png"
 
 flutter:
 
