@@ -1,4 +1,4 @@
-package com.example.flutter_dictionary
+package dangerahead.dictionary
 
 import io.flutter.embedding.android.FlutterActivity
 
