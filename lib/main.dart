@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/painting.dart';
 
 void main() {
   runApp(MyApp());
@@ -9,19 +10,16 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Dictionary',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: MyHomePage(title: 'Dictionary'),
+      home: MyHomePage(),
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key? key, required this.title}) : super(key: key);
-
-  final String title;
+  MyHomePage({Key? key}) : super(key: key);
 
   @override
   _MyHomePageState createState() => _MyHomePageState();
@@ -36,24 +34,31 @@ class _MyHomePageState extends State<MyHomePage> {
           children: [
             Container(
               color: Colors.blue,
-              child: Align(
-                alignment: Alignment.topCenter,
-                child: Padding(
-                  padding: const EdgeInsets.only(top: 50),
-                  child: Text(
-                    "Dictionary",
-                    style: TextStyle(color: Colors.white, fontSize: 20),
-                  ),
-                ),
-              )
+                  child: Column(
+                    children: [
+                      Padding(
+                          padding: const EdgeInsets.only(top: 50),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children:[
+                              Text(
+                                "D I C T I O N A R Y   ",
+                                style: TextStyle(color: Colors.white, fontSize: 20),
+                              ),
+                              Image.asset('images/icon.png', height: 20, width: 20,)
+                            ],  //row-children
+                          ),
+                      )
+                    ]   //column-children
+                  )
             ),
             Padding(
                 padding: const EdgeInsets.only(top: 100),
                 child: Container(
                   decoration: BoxDecoration(
                     color: Colors.white,
-                    borderRadius: BorderRadius.only(topLeft: Radius.circular(20),
-                    topRight: Radius.circular(20))
+                    borderRadius: BorderRadius.only(topLeft: Radius.circular(15),
+                    topRight: Radius.circular(15))
                   )
                 )
             )
