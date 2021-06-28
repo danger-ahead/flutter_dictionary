@@ -2,49 +2,74 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'data.dart';
+import 'results.dart';
 
-dynamic homeLayout(int selected) {
+dynamic homeLayout(int selected, BuildContext context) {
   TextEditingController _word = TextEditingController();
 
   List<Widget> widgetArray = [
-    Padding(
-      padding: const EdgeInsets.only(left: 20, right: 20, top: 265),
-      child: Column(children: [
-        TextField(
-          controller: _word,
-          decoration: InputDecoration(
-            border: OutlineInputBorder(),
-            labelText: 'Enter word',
+    SingleChildScrollView(
+      reverse: true,
+      child: Padding(
+        padding: const EdgeInsets.only(left: 20, right: 20),
+        child: Column(children: [
+          ClipOval(
+            child: Image.asset(
+              'images/icon.png',
+              scale: 4,
+            ),
           ),
-        ),
-        Padding(
-          padding: const EdgeInsets.only(top: 20),
-          child: CupertinoButton(
-              child: Text(
-                "Search",
-                style: TextStyle(color: Colors.blue),
+          Padding(
+            padding: const EdgeInsets.only(top: 20),
+            child: TextField(
+              controller: _word,
+              decoration: InputDecoration(
+                border: OutlineInputBorder(),
+                labelText: 'Search for a word',
               ),
-              color: Colors.black,
-              onPressed: () {
-                _word.text = '';
-              }),
-        )
-      ]),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(top: 20),
+            child: CupertinoButton(
+                child: Text(
+                  "Search!",
+                  style: TextStyle(color: Colors.white),
+                ),
+                color: Colors.blue,
+                onPressed: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    return Results();
+                  }));
+                  _word.text = '';
+                }),
+          ),
+        ]),
+      ),
     ),
     Padding(
-      padding: const EdgeInsets.only(top: 100),
-      child: Container(
-        child: Card(
-            child: FutureBuilder(
-                future: getData('hello'),
-                builder: (context, AsyncSnapshot snapshot) {
-                  if (snapshot.data == null) {
-                    return Container(child: Center(child: Text('Loading')));
-                  } else
-                    return Text(
-                      snapshot.data[0].partOfSpeech,
-                    );
-                })),
+      padding: const EdgeInsets.only(top: 40, left: 10, right: 10),
+      child: Column(
+        children: [
+          Card(
+            child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(25),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(15.0),
+                      child: Image.asset(
+                        'images/self.png',
+                        scale: 4,
+                      ),
+                    ),
+                  ),
+                  Text(
+                      "Hi I'm Shourya\n\nAnd DICTIONARY\nis my first flutter project."),
+                ]),
+          )
+        ],
       ),
     )
   ];
