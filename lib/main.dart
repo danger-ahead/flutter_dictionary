@@ -27,58 +27,72 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-
   int selected = 0;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Stack(
-          children: [
-            Container(
-              color: Colors.blue,
-                  child: Column(
+      body: Stack(
+        children: [
+          Container(
+              color: Colors.black,
+              child: Column(children: [
+                Padding(
+                  padding: const EdgeInsets.only(top: 50),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Padding(
-                          padding: const EdgeInsets.only(top: 50),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children:[
-                              Text(
-                                "D I C T I O N A R Y ",
-                                style: TextStyle(color: Colors.white, fontSize: 20),
-                              ),
-                              Image.asset('images/icon.png', height: 20, width: 20)
-                            ],  //row-children
-                          ),  //Row
-                      )   //Padding
-                    ]   //column-children
-                  )   //Column
-            ),    //Container
-            Padding(
-                padding: const EdgeInsets.only(top: 100),
-                child: Container(
-                  child: Center(
-                    child: homeLayout(selected),
-                  ),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.only(topLeft: Radius.circular(15),
-                    topRight: Radius.circular(15)),
-                  ),    //BoxDecoration
-                )   //Container
-            )   //Padding
-          ],
-        ),  //Stack
-        bottomNavigationBar: BottomNavigationBar(items: [
-            BottomNavigationBarItem(icon: Icon(Icons.account_balance_outlined), label: 'Home'),
-            BottomNavigationBarItem(icon: Icon(Icons.article_outlined), label: 'About'),
-          ],
-          onTap: tapBottomNavBar,
-          currentIndex: selected,
-        ),  //BottomNavigationBar
-    );  //Scaffold
+                      Text(
+                        "D I C T I O N A R Y ",
+                        style: TextStyle(color: Colors.blue, fontSize: 20),
+                      ),
+                      Image.asset('images/icon.png', height: 20, width: 20)
+                    ], //row-children
+                  ), //Row
+                ) //Padding
+              ] //column-children
+                  ) //Column
+              ), //Container
+          Padding(
+              padding: const EdgeInsets.only(top: 100),
+              child: Container(
+                child: Center(
+                  child: homeLayout(selected),
+                ),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(15),
+                      topRight: Radius.circular(15)),
+                ), //BoxDecoration
+              ) //Container
+              ) //Padding
+        ],
+      ), //Stack
+      bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: Colors.black,
+        unselectedItemColor: Colors.white,
+        selectedItemColor: Colors.blue,
+        items: [
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.account_balance_outlined,
+            ),
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.article_outlined,
+            ),
+            label: 'About',
+          ),
+        ],
+        onTap: tapBottomNavBar,
+        currentIndex: selected,
+      ), //BottomNavigationBar
+    ); //Scaffold
   }
+
   void tapBottomNavBar(int integer) {
     setState(() {
       selected = integer;
