@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
-import 'data.dart';
 import 'results.dart';
 
 dynamic homeLayout(int selected, BuildContext context) {
@@ -39,14 +38,13 @@ dynamic homeLayout(int selected, BuildContext context) {
                 color: Colors.blue,
                 onPressed: () {
                   Navigator.push(context, MaterialPageRoute(builder: (context) {
-                    return Results();
-                  }));
-                  _word.text = '';
-                }),
-          ),
-        ]),
-      ),
-    ),
+                    return Results(_word.text);
+                  }));  //MaterialPageRoute
+                }), //CupertinoButton
+          ),  //Padding
+        ]), //Column
+      ),  //Padding
+    ),  //SingleChildScrollView
     Padding(
       padding: const EdgeInsets.only(top: 40, left: 10, right: 10),
       child: Column(
@@ -62,16 +60,16 @@ dynamic homeLayout(int selected, BuildContext context) {
                       child: Image.asset(
                         'images/self.png',
                         scale: 4,
-                      ),
-                    ),
-                  ),
+                      ),  //Image.asset
+                    ),  //ClipReact
+                  ),  //Padding
                   Text(
                       "Hi I'm Shourya\n\nAnd DICTIONARY\nis my first flutter project."),
-                ]),
-          )
+                ]), //Row
+          ) //Card
         ],
-      ),
-    )
+      ),  //Column
+    ) //Padding
   ];
   return widgetArray[selected];
 }

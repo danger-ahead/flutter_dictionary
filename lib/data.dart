@@ -20,9 +20,6 @@ Future<List> getData(String s) async {
     Data d = Data(x["partOfSpeech"], definition);
     data.add(d);
   }
-  print(data.length);
-  print(data[0].partOfSpeech);
-  print(data[0].definition);
 
   return data;
 }
