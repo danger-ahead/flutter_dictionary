@@ -10,30 +10,20 @@ class Results extends StatelessWidget {
         child: FutureBuilder(
           future: getData('hello'),
           builder: (context, snapshot) {
-            var count = snapshot.data;
-            if (count == null) {
+            if (snapshot.data == null) {
               return Container(
-                child: Text("Loading"),
+                child: Text(snapshot.data.runtimeType.toString()),
               );
-            }
-            return ListView.builder(
-                itemCount: count.length,
-                itemBuilder: (context, i) {
-                  return ListTile(
-                    title: snapshot.data[i].partOfSpeech,
-                  );
-                });
-            switch (snapshot.connectionState) {
-              case ConnectionState.done:
-                return ListView.builder(
-                    itemCount: snapshot.data.length,
-                    itemBuilder: (context, i) {
-                      return ListTile(
-                        title: snapshot.data[i].partOfSpeech,
-                      );
-                    });
-              default:
-                return Text("heyw2");
+            }else{
+              var data = (snapshot.data as List<Data>).toList();
+              return ListView.builder(
+                  itemCount: data.length,
+                  itemBuilder: (context, i) {
+                    return ListTile(
+                      title: Text(data[i].partOfSpeech),
+                      subtitle: Text(data[i].definition),
+                    );
+                  });
             }
           },
         ),

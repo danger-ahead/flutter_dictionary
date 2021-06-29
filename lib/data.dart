@@ -8,7 +8,7 @@ class Data {
   Data(this.partOfSpeech, this.definition);
 }
 
-Future getData(String s) async {
+Future<List> getData(String s) async {
   var response = await http
       .get(Uri.https('api.dictionaryapi.dev', 'api/v2/entries/en_US/' + s));
   var jsonData = jsonDecode(response.body)[0];
