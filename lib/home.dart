@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
+import 'package:flutter_dictionary/random_results.dart';
 import 'results.dart';
 
 dynamic homeLayout(int selected, BuildContext context) {
@@ -36,7 +37,9 @@ dynamic homeLayout(int selected, BuildContext context) {
               color: Colors.blue,
               onPressed: () {
                 Navigator.push(context, MaterialPageRoute(builder: (context) {
-                  return Results(_word.text);
+                  return _word.text == ''
+                      ? RandomResults()
+                      : Results(_word.text);
                 })); //MaterialPageRoute
               }), //CupertinoButton
         ), //Padding
@@ -55,7 +58,8 @@ dynamic homeLayout(int selected, BuildContext context) {
           child: ListTile(
             leading: ClipRect(
                 child: Image.network(
-                    'https://avatars.githubusercontent.com/u/55531939?v=4')), //ClipRect
+                    'https://avatars.githubusercontent.com/u/55531939?v=4')),
+            //ClipRect
             title: Text(
                 "Hi I'm Shourya\nDICTIONARY is my first flutter project."), //Text
           ),

@@ -55,7 +55,8 @@ class _MyHomePageState extends State<MyHomePage> {
           Padding(
               padding: const EdgeInsets.only(top: 100),
               child: Container(
-                padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 42),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 32, vertical: 42),
                 child: Center(
                   child: homeLayout(selected, context),
                 ),

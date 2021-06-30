@@ -17,8 +17,21 @@ Future<List> getData(String s) async {
   List<Data> data = [];
 
   for (var x in jsonData["meanings"]) {
-    String definition = x["definitions"][0]["definition"];
-    String example = x["definitions"][0]["example"];
+    String definition = '';
+    String example = '';
+
+    var definitions = x["definitions"];
+    for (var y in definitions) {
+      definition += y["definition"] + "; ";
+      if (y["example"] != null) {
+        example += y["example"] + "; ";
+      } else {
+        example += "--EXAMPLE NOT APPLICABLE-- ";
+      }
+    }
+
+    definition = definition.substring(0, definition.length - 1);
+    example = example.substring(0, example.length - 1);
     Data d = Data(x["partOfSpeech"], definition, example);
     data.add(d);
   }

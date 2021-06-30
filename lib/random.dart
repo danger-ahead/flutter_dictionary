@@ -10,8 +10,8 @@ class Random {
 }
 
 Future<Random> getRandomWord() async {
-  var response = await http
-      .get(Uri.https('random-words-api.vercel.app', 'word'));
+  var response =
+      await http.get(Uri.https('random-words-api.vercel.app', 'word'));
   var jsonData = jsonDecode(response.body)[0];
 
   Random r = Random('Error', 'Error', 'Error');
@@ -21,9 +21,6 @@ Future<Random> getRandomWord() async {
   definition = definition.substring(0, definition.length - 2);
   String pronunciation = jsonData["pronunciation"];
   r = Random(word, definition, pronunciation);
-
-  print("bccibefbcef");
-  print(word);
 
   return r;
 }
