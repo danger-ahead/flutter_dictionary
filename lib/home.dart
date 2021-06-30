@@ -37,29 +37,27 @@ dynamic homeLayout(int selected, BuildContext context) {
               onPressed: () {
                 Navigator.push(context, MaterialPageRoute(builder: (context) {
                   return Results(_word.text);
-                }));  //MaterialPageRoute
+                })); //MaterialPageRoute
               }), //CupertinoButton
-        ),  //Padding
-      ]),  //Column
-    ),  //SingleChildScrollView
+        ), //Padding
+      ]), //Column
+    ), //SingleChildScrollView
     ListView(
       children: [
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 24),
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.all(Radius.circular(15)),
-            gradient: LinearGradient(
-              colors: [Colors.blue, Colors.lightBlueAccent],
-              begin: Alignment.centerRight,
-              end: Alignment.centerLeft
-            )
-          ),
+              borderRadius: BorderRadius.all(Radius.circular(15)),
+              gradient: LinearGradient(
+                  colors: [Colors.blue, Colors.lightBlueAccent],
+                  begin: Alignment.centerRight,
+                  end: Alignment.centerLeft)),
           child: ListTile(
             leading: ClipRect(
-                child: Image.network('https://avatars.githubusercontent.com/u/55531939?v=4')
-            ),  //ClipRect
+                child: Image.network(
+                    'https://avatars.githubusercontent.com/u/55531939?v=4')), //ClipRect
             title: Text(
-                "Hi I'm Shourya\nDICTIONARY is my first flutter project."),  //Text
+                "Hi I'm Shourya\nDICTIONARY is my first flutter project."), //Text
           ),
         ),
       ],
