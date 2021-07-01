@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'home_about.dart';
+import 'AppConnectivity.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 
 void main() {
   runApp(MyApp());
@@ -27,10 +29,32 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  Map _source = {ConnectivityResult.none: false};
+  AppConnectivity _connectivity = AppConnectivity.instance;
+
+  @override
+  void initState() {
+    super.initState();
+    _connectivity.initialise();
+    _connectivity.myStream.listen((source) {
+      setState(() => _source = source);
+    });
+  }
+
   int selected = 0;
 
   @override
   Widget build(BuildContext context) {
+    String connectionStatus = '';
+    switch (_source.keys.toList()[0]) {
+      case ConnectivityResult.none:
+        connectionStatus = " Offline";
+        break;
+      case ConnectivityResult.mobile:
+      case ConnectivityResult.wifi:
+        connectionStatus = " Online";
+    }
+
     return Scaffold(
       body: Stack(
         children: [
@@ -46,6 +70,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         "D I C T I O N A R Y ",
                         style: TextStyle(color: Colors.white, fontSize: 20),
                       ),
+                      Text("$connectionStatus"),
                     ], //row-children
                   ), //Row
                 ) //Padding

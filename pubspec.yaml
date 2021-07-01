@@ -14,12 +14,13 @@ dependencies:
 
   cupertino_icons: ^1.0.3
   http: ^0.13.3
+  connectivity_plus: ^1.0.4
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_launcher_name: ^0.0.1
-  flutter_launcher_icons: ^0.8.0
+  flutter_launcher_icons: ^0.9.0
+  yaml: ^3.1.0
 
 flutter_launcher_name:
   name: "Dictionary"

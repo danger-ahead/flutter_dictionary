@@ -18,8 +18,7 @@ class Results extends StatelessWidget {
         future: getData(word.toString()),
         builder: (context, snapshot) {
           if (snapshot.data == null) {
-            Loading l = Loading();
-            return l.loading(); //Center
+            return loading; //Center
           } else {
             var data = (snapshot.data as List<Data>).toList();
             return ListView.builder(
@@ -43,7 +42,7 @@ class Results extends StatelessWidget {
                               color: Colors.white, fontWeight: FontWeight.bold),
                         ),
                         subtitle: Text(
-                          "Example: " + data[i].example,
+                          "Examples:\n\n" + data[i].example,
                           style: TextStyle(fontWeight: FontWeight.bold),
                         ),
                       ),

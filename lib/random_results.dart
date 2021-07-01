@@ -13,8 +13,7 @@ class RandomResults extends StatelessWidget {
             future: getRandomWord(),
             builder: (context, snapshot) {
               if (snapshot.data == null) {
-                Loading l = Loading();
-                return l.loading(); //Center
+                return loading; //Center
               } else {
                 var data = (snapshot.data as Random);
                 return ListView(
