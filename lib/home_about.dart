@@ -4,14 +4,14 @@ import 'package:flutter/painting.dart';
 import 'package:flutter_dictionary/random_results.dart';
 import 'results.dart';
 
-dynamic homeLayout(int selected, BuildContext context) {
+dynamic layoutHomeAbout(int selected, BuildContext context) {
   TextEditingController _word = TextEditingController();
 
   List<Widget> widgetArray = [
     SingleChildScrollView(
       reverse: true,
       child: Column(children: [
-        ClipOval(
+        ClipRect(
           child: Image.asset(
             'images/icon.png',
             scale: 4,
@@ -36,10 +36,10 @@ dynamic homeLayout(int selected, BuildContext context) {
               ),
               color: Colors.blue,
               onPressed: () {
+                String word = _word.text;
+                _word.text = '';
                 Navigator.push(context, MaterialPageRoute(builder: (context) {
-                  return _word.text == ''
-                      ? RandomResults()
-                      : Results(_word.text);
+                  return word == '' ? RandomResults() : Results(word);
                 })); //MaterialPageRoute
               }), //CupertinoButton
         ), //Padding

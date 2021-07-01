@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
+import 'widgets/loading.dart';
 
 import 'random.dart';
 
@@ -12,9 +13,8 @@ class RandomResults extends StatelessWidget {
             future: getRandomWord(),
             builder: (context, snapshot) {
               if (snapshot.data == null) {
-                return Center(
-                  child: Text("Loading..."),
-                ); //Center
+                Loading l = Loading();
+                return l.loading(); //Center
               } else {
                 var data = (snapshot.data as Random);
                 return ListView(
@@ -37,9 +37,7 @@ class RandomResults extends StatelessWidget {
                             style: TextStyle(color: Colors.white, fontSize: 16),
                           ),
                           Text(
-                            "But here's a word for you, \"" +
-                                data.word +
-                                "\".",
+                            "But here's a word for you, \"" + data.word + "\".",
                             style: TextStyle(color: Colors.black, fontSize: 16),
                           ),
                           Text(

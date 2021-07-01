@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
-import 'home.dart';
+import 'home_about.dart';
 
 void main() {
   runApp(MyApp());
@@ -58,7 +58,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 padding:
                     const EdgeInsets.symmetric(horizontal: 32, vertical: 42),
                 child: Center(
-                  child: homeLayout(selected, context),
+                  child: layoutHomeAbout(selected, context),
                 ),
                 decoration: BoxDecoration(
                   color: Colors.white,

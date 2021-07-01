@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'data.dart';
+import 'widgets/loading.dart';
 
 class Results extends StatelessWidget {
   static String word = '';
@@ -17,26 +18,35 @@ class Results extends StatelessWidget {
         future: getData(word.toString()),
         builder: (context, snapshot) {
           if (snapshot.data == null) {
-            return Center(
-              child: Text("Loading..."),
-            ); //Center
+            Loading l = Loading();
+            return l.loading(); //Center
           } else {
             var data = (snapshot.data as List<Data>).toList();
             return ListView.builder(
                 itemCount: data.length,
                 itemBuilder: (context, i) {
-                  return ListTile(
-                    title: Text(
-                      "Part of Speech: " +
-                          data[i].partOfSpeech +
-                          ";\nMeaning: " +
-                          data[i].definition,
-                      style: TextStyle(
-                          color: Colors.blue, fontWeight: FontWeight.bold),
-                    ),
-                    subtitle: Text(
-                      "Example: " + data[i].example,
-                      style: TextStyle(fontWeight: FontWeight.bold),
+                  return Padding(
+                    padding: const EdgeInsets.only(top: 8, left: 8, right: 8),
+                    child: Container(
+                      padding: const EdgeInsets.all(8),
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(15),
+                          gradient: LinearGradient(
+                            colors: [Colors.blueAccent, Colors.blue],
+                            begin: Alignment.topLeft,
+                            end: Alignment.bottomRight,
+                          )),
+                      child: ListTile(
+                        title: Text(
+                          data[i].partOfSpeech + "\n\n" + data[i].definition,
+                          style: TextStyle(
+                              color: Colors.white, fontWeight: FontWeight.bold),
+                        ),
+                        subtitle: Text(
+                          "Example: " + data[i].example,
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                      ),
                     ),
                   ); //ListTile
                 }); //ListViw.builder

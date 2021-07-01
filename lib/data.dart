@@ -22,11 +22,11 @@ Future<List> getData(String s) async {
 
     var definitions = x["definitions"];
     for (var y in definitions) {
-      definition += y["definition"] + "; ";
+      definition += y["definition"] + "\n\n";
       if (y["example"] != null) {
-        example += y["example"] + "; ";
+        example += y["example"] + "\n\n";
       } else {
-        example += "--EXAMPLE NOT APPLICABLE-- ";
+        example += "*example not available* ";
       }
     }
 
