@@ -8,43 +8,40 @@ dynamic layoutHomeAbout(int selected, BuildContext context) {
   TextEditingController _word = TextEditingController();
 
   List<Widget> widgetArray = [
-    SingleChildScrollView(
-      reverse: true,
-      child: Column(children: [
-        ClipRect(
-          child: Image.asset(
-            'images/icon.png',
-            scale: 4,
+    ListView(children: [
+      ClipRect(
+        child: Image.asset(
+          'images/icon.png',
+          scale: 2,
+        ),
+      ),
+      Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 24.0),
+        child: TextField(
+          controller: _word,
+          decoration: InputDecoration(
+            border: OutlineInputBorder(),
+            labelText: 'Search for a word',
           ),
         ),
-        Padding(
-          padding: const EdgeInsets.only(top: 20),
-          child: TextField(
-            controller: _word,
-            decoration: InputDecoration(
-              border: OutlineInputBorder(),
-              labelText: 'Search for a word',
+      ),
+      Padding(
+        padding: const EdgeInsets.only(top: 20, left: 24, right: 24, bottom: 8),
+        child: CupertinoButton(
+            child: Text(
+              "Search!",
+              style: TextStyle(color: Colors.white),
             ),
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.only(top: 20),
-          child: CupertinoButton(
-              child: Text(
-                "Search!",
-                style: TextStyle(color: Colors.white),
-              ),
-              color: Colors.blue,
-              onPressed: () {
-                String word = _word.text;
-                _word.text = '';
-                Navigator.push(context, MaterialPageRoute(builder: (context) {
-                  return word == '' ? RandomResults() : Results(word);
-                })); //MaterialPageRoute
-              }), //CupertinoButton
-        ), //Padding
-      ]), //Column
-    ), //SingleChildScrollView
+            color: Colors.blue,
+            onPressed: () {
+              String word = _word.text;
+              _word.text = '';
+              Navigator.push(context, MaterialPageRoute(builder: (context) {
+                return word == '' ? RandomResults() : Results(word);
+              })); //MaterialPageRoute
+            }), //CupertinoButton
+      ), //Padding
+    ]), //SingleChildScrollView
     ListView(
       children: [
         Container(
