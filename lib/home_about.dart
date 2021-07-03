@@ -44,21 +44,24 @@ dynamic layoutHomeAbout(int selected, BuildContext context) {
     ]), //SingleChildScrollView
     ListView(
       children: [
-        Container(
-          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 24),
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.all(Radius.circular(15)),
-              gradient: LinearGradient(
-                  colors: [Colors.blue, Colors.lightBlueAccent],
-                  begin: Alignment.centerRight,
-                  end: Alignment.centerLeft)),
-          child: ListTile(
-            leading: ClipRect(
-                child: Image.network(
-                    'https://avatars.githubusercontent.com/u/55531939?v=4')),
-            //ClipRect
-            title: Text(
-                "Hi I'm Shourya\nDICTIONARY is my first flutter project."), //Text
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Container(
+            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 24),
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.all(Radius.circular(15)),
+                gradient: LinearGradient(
+                    colors: [Colors.blue, Colors.lightBlueAccent],
+                    begin: Alignment.centerRight,
+                    end: Alignment.centerLeft)),
+            child: ListTile(
+              leading: ClipRect(
+                  child: Image.network(
+                      'https://avatars.githubusercontent.com/u/55531939?v=4')),
+              //ClipRect
+              title: Text(
+                  "Hi I'm Shourya\nDICTIONARY is my first flutter project."), //Text
+            ),
           ),
         ),
       ],
