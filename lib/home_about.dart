@@ -2,7 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter_dictionary/PreviousWords.dart';
+import 'package:flutter_dictionary/WordsDatabase.dart';
 import 'package:flutter_dictionary/random_results.dart';
+import 'package:flutter_dictionary/words.dart';
 import 'results.dart';
 
 dynamic layoutHomeAbout(int selected, BuildContext context) {
@@ -34,10 +36,10 @@ dynamic layoutHomeAbout(int selected, BuildContext context) {
               style: TextStyle(color: Colors.white),
             ),
             color: Colors.blue,
-            onPressed: () {
+            onPressed: () async {
               String word = _word.text;
+              await addWord(word);
               _word.text = '';
-
               Navigator.push(context, MaterialPageRoute(builder: (context) {
                 return word == '' ? RandomResults() : Results(word);
               })); //MaterialPageRoute
@@ -84,4 +86,10 @@ dynamic layoutHomeAbout(int selected, BuildContext context) {
     )
   ];
   return widgetArray[selected];
+}
+
+Future addWord(String word) async{
+  final newWord = Word(word: word);
+
+  await WordsDatabase.instance.create(newWord);
 }
