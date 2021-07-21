@@ -10,7 +10,7 @@ class WordsDatabase{
   WordsDatabase._init();
 
   Future<Database> get database async{
-    if (_database != null) return _database;
+    if (_database != null) return _database!;
 
     _database = await _initDB('words.db');
     return _database!;
@@ -42,7 +42,7 @@ class WordsDatabase{
     return word.copy(id:id);
   }
 
-  Future<List<Word>> readAllNotes() async{
+  Future<List<Word>> readAllWords() async{
     final db = await instance.database;
 
     final orderBy = '${WordFields.id} ASC';

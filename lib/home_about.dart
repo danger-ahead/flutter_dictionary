@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
+import 'package:flutter_dictionary/PreviousWords.dart';
 import 'package:flutter_dictionary/random_results.dart';
 import 'results.dart';
 
@@ -36,6 +37,7 @@ dynamic layoutHomeAbout(int selected, BuildContext context) {
             onPressed: () {
               String word = _word.text;
               _word.text = '';
+
               Navigator.push(context, MaterialPageRoute(builder: (context) {
                 return word == '' ? RandomResults() : Results(word);
               })); //MaterialPageRoute
@@ -44,6 +46,20 @@ dynamic layoutHomeAbout(int selected, BuildContext context) {
     ]), //SingleChildScrollView
     ListView(
       children: [
+        Padding(
+          padding: const EdgeInsets.only(top: 8.0, left: 8.0, right: 8.0),
+          child: CupertinoButton(
+              child: Text(
+                "Previous searched words",
+                style: TextStyle(color: Colors.white),
+              ),
+              color: Colors.blue,
+              onPressed: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  return PreviousWords();
+                }));
+              }),
+        ),
         Padding(
           padding: const EdgeInsets.all(8.0),
           child: Container(

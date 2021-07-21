@@ -65,10 +65,4 @@ class _MyHomePageState extends State<MyHomePage> {
           children: [layoutHomeAbout(0, context), layoutHomeAbout(1, context)],
         ),
       ));
-
-/*{
-
-
-    ; //Scaffold
-  }*/
 }
