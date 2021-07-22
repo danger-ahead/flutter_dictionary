@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/painting.dart';
 import 'home_about.dart';
 import 'AppConnectivity.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';

@@ -79,6 +79,12 @@ class WordsDatabase{
     );
   }
 
+  Future deleteAll() async {
+    final db = await instance.database;
+
+    return db.delete(tableWords);
+  }
+
   Future close() async{
     final db = await instance.database;
 

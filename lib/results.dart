@@ -27,27 +27,18 @@ class Results extends StatelessWidget {
             return ListView.builder(
                 itemCount: data.length,
                 itemBuilder: (context, i) {
-                  return Padding(
-                    padding: const EdgeInsets.only(top: 8, left: 8, right: 8),
-                    child: Container(
-                      padding: const EdgeInsets.all(8),
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(15),
-                          gradient: LinearGradient(
-                            colors: [Colors.blueAccent, Colors.blue],
-                            begin: Alignment.topLeft,
-                            end: Alignment.bottomRight,
-                          )),
-                      child: ListTile(
-                        title: Text(
-                          data[i].partOfSpeech + "\n\n" + data[i].definition,
-                          style: TextStyle(
-                              color: Colors.white, fontWeight: FontWeight.bold),
-                        ),
-                        subtitle: Text(
-                          "Examples:\n\n" + data[i].example,
-                          style: TextStyle(fontWeight: FontWeight.bold),
-                        ),
+                  return Card(
+                    shadowColor: Colors.black,
+                    elevation: 8,
+                    child: ListTile(
+                      title: Text(
+                        data[i].partOfSpeech + "\n\n" + data[i].definition,
+                        style: TextStyle(
+                            color: Colors.black, fontWeight: FontWeight.bold),
+                      ),
+                      subtitle: Text(
+                        "Examples:\n\n" + data[i].example,
+                        style: TextStyle(fontWeight: FontWeight.bold),
                       ),
                     ),
                   ); //ListTile

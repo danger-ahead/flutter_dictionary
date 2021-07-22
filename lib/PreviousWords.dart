@@ -16,33 +16,37 @@ class PreviousWords extends StatelessWidget {
               itemCount: snapshot.data!.length,
               itemBuilder: (BuildContext context, int index) {
                 Word item = snapshot.data![index];
-                return ListTile(
-                  title: Text("\t\t"+item.word),
-                  trailing: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      IconButton(
-                        color: Colors.blue,
-                        icon: Icon(Icons.keyboard_arrow_right),
-                        onPressed: () async {
-                          Navigator.push(context, MaterialPageRoute(builder: (context) {
-                            return Results(item.word);
-                          }));
-                        },
-                      ),
-                      IconButton(
-                        color: Colors.blue,
-                        icon: Icon(Icons.close),
-                        onPressed: () async {
-                          await WordsDatabase.instance.delete(item.id);
+                return Card(
+                  shadowColor: Colors.black,
+                  elevation: 4,
+                  child: ListTile(
+                    title: Text("\t\t"+item.word),
+                    trailing: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        IconButton(
+                          color: Colors.blue,
+                          icon: Icon(Icons.keyboard_arrow_right),
+                          onPressed: () async {
+                            Navigator.push(context, MaterialPageRoute(builder: (context) {
+                              return Results(item.word);
+                            }));
+                          },
+                        ),
+                        IconButton(
+                          color: Colors.blue,
+                          icon: Icon(Icons.close),
+                          onPressed: () async {
+                            await WordsDatabase.instance.delete(item.id);
 
-                          Navigator.of(context).pop();
-                          Navigator.push(context, MaterialPageRoute(builder: (context) {
-                            return PreviousWords();
-                          }));
-                        },
-                      ),
-                    ],
+                            Navigator.of(context).pop();
+                            Navigator.push(context, MaterialPageRoute(builder: (context) {
+                              return PreviousWords();
+                            }));
+                          },
+                        ),
+                      ],
+                    ),
                   ),
                 );
               },
@@ -51,6 +55,19 @@ class PreviousWords extends StatelessWidget {
             return Center(child: CircularProgressIndicator());
           }
         },
+      ),
+      bottomNavigationBar: BottomAppBar(
+        child: TextButton(
+          child: Text("DELETE SEARCH HISTORY"),
+          onPressed: () async {
+            await WordsDatabase.instance.deleteAll();
+
+            Navigator.of(context).pop();
+            Navigator.push(context, MaterialPageRoute(builder: (context) {
+              return PreviousWords();
+            }));
+          },
+        ),
       ),
     );
   }
