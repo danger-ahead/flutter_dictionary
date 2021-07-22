@@ -4,6 +4,7 @@ import 'package:flutter/painting.dart';
 import 'package:flutter_dictionary/PreviousWords.dart';
 import 'package:flutter_dictionary/random_results.dart';
 import 'results.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 dynamic layoutHomeAbout(int selected, BuildContext context) {
   TextEditingController _word = TextEditingController();
@@ -20,20 +21,17 @@ dynamic layoutHomeAbout(int selected, BuildContext context) {
         padding: const EdgeInsets.symmetric(horizontal: 24.0),
         child: TextField(
           controller: _word,
+          textAlign: TextAlign.center,
           decoration: InputDecoration(
-            border: OutlineInputBorder(),
-            labelText: 'Search for a word',
+            filled: true,
+            helperText: 'Enter a word',
           ),
         ),
       ),
       Padding(
         padding: const EdgeInsets.only(top: 20, left: 24, right: 24, bottom: 8),
-        child: CupertinoButton(
-            child: Text(
-              "Search!",
-              style: TextStyle(color: Colors.white),
-            ),
-            color: Colors.blue,
+        child: ElevatedButton(
+            child: Text("Search!"),
             onPressed: () async {
               String word = _word.text;
               _word.text = '';
@@ -61,16 +59,62 @@ dynamic layoutHomeAbout(int selected, BuildContext context) {
         Card(
           shadowColor: Colors.black,
           elevation: 4,
-          child: ListTile(
-            leading: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 4.0),
-              child: ClipRect(
-                  child: Image.network(
-                      'https://avatars.githubusercontent.com/u/55531939?v=4')),
-            ),
-            //ClipRect
-            title: Text(
-                "Hi I'm Shourya\nDICTIONARY is my first flutter project."), //Text
+          child: Column(
+            children: [
+              ListTile(
+                leading: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 4.0),
+                  child: ClipRect(
+                      child: Image.network(
+                          'https://avatars.githubusercontent.com/u/55531939?v=4')),
+                ),
+                //ClipRect
+                title: Text(
+                  "Hi, I'm Shourya!\nDICTIONARY is my first flutter project.",
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ), //Text
+              ),
+              ButtonBar(
+                alignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  IconButton(
+                    onPressed: () async {
+                      await canLaunch(_github)
+                          ? await launch(_github,
+                              forceWebView: true,
+                              enableJavaScript: true,
+                              enableDomStorage: true)
+                          : throw 'Could not launch $_github';
+                    },
+                    icon: Image.network(
+                      'https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png',
+                      scale: 15,
+                    ),
+                  ),
+                  IconButton(
+                    onPressed: () async {
+                      final Uri params = Uri(
+                        scheme: 'mailto',
+                        path: 'danger.ahead@pm.me',
+                        query:
+                            'subject=DICTIONARY Feedback', //add subject and body here
+                      );
+
+                      var url = params.toString();
+                      if (await canLaunch(url)) {
+                        await launch(url);
+                      } else {
+                        throw 'Could not launch $url';
+                      }
+                    },
+                    icon: Image.network(
+                      'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Email_Logo_PNG.png/640px-Email_Logo_PNG.png',
+                      scale: 25,
+                    ),
+                  ),
+                ],
+              )
+            ],
           ),
         ),
       ],
@@ -78,3 +122,5 @@ dynamic layoutHomeAbout(int selected, BuildContext context) {
   ];
   return widgetArray[selected];
 }
+
+const _github = 'https://github.com/danger-ahead/flutter_dictionary';

@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'home_about.dart';
-import 'AppConnectivity.dart';
-import 'package:connectivity_plus/connectivity_plus.dart';
 
 void main() {
   runApp(MyApp());
@@ -28,16 +26,9 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  Map _source = {ConnectivityResult.none: false};
-  AppConnectivity _connectivity = AppConnectivity.instance;
-
   @override
   void initState() {
     super.initState();
-    _connectivity.initialise();
-    _connectivity.myStream.listen((source) {
-      setState(() => _source = source);
-    });
   }
 
   int selected = 0;

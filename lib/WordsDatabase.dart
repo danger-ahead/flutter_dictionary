@@ -2,28 +2,28 @@ import 'package:flutter_dictionary/words.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 
-class WordsDatabase{
+class WordsDatabase {
   static final WordsDatabase instance = WordsDatabase._init();
 
   static Database? _database;
 
   WordsDatabase._init();
 
-  Future<Database> get database async{
+  Future<Database> get database async {
     if (_database != null) return _database!;
 
     _database = await _initDB('words.db');
     return _database!;
   }
 
-  Future<Database> _initDB(String filePath) async{
+  Future<Database> _initDB(String filePath) async {
     final dbPath = await getDatabasesPath();
     final path = join(dbPath, filePath);
 
     return await openDatabase(path, version: 1, onCreate: _createDB);
   }
 
-  Future _createDB(Database db, int version) async{
+  Future _createDB(Database db, int version) async {
     final idType = 'INTEGER PRIMARY KEY AUTOINCREMENT';
     final wordType = 'TEXT NOT NULL';
 
@@ -34,15 +34,15 @@ class WordsDatabase{
     )
     ''');
   }
-  
-  Future<Word> create(Word word) async{
+
+  Future<Word> create(Word word) async {
     final db = await instance.database;
 
     final id = await db.insert(tableWords, word.toJson());
-    return word.copy(id:id);
+    return word.copy(id: id);
   }
 
-  Future<List<Word>> readAllWords() async{
+  Future<List<Word>> readAllWords() async {
     final db = await instance.database;
 
     final orderBy = '${WordFields.id} ASC';
@@ -52,7 +52,7 @@ class WordsDatabase{
     return result.map((json) => Word.fromJson(json)).toList();
   }
 
-  Future<Word?> readWord(int id) async{
+  Future<Word?> readWord(int id) async {
     final db = await instance.database;
 
     final maps = await db.query(
@@ -62,9 +62,9 @@ class WordsDatabase{
       whereArgs: [id],
     );
 
-    if (maps.isNotEmpty){
+    if (maps.isNotEmpty) {
       return Word.fromJson(maps.first);
-    } else{
+    } else {
       throw Exception('ID $id not found');
     }
   }
@@ -73,9 +73,9 @@ class WordsDatabase{
     final db = await instance.database;
 
     return await db.delete(
-        tableWords,
-        where: '${WordFields.id} = ?',
-        whereArgs: [id],
+      tableWords,
+      where: '${WordFields.id} = ?',
+      whereArgs: [id],
     );
   }
 
@@ -85,7 +85,7 @@ class WordsDatabase{
     return db.delete(tableWords);
   }
 
-  Future close() async{
+  Future close() async {
     final db = await instance.database;
 
     db.close();

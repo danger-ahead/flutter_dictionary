@@ -1,15 +1,13 @@
 final String tableWords = 'words';
 
-class WordFields{
-  static final List<String> values = [
-    id, word
-  ];
+class WordFields {
+  static final List<String> values = [id, word];
 
   static final String id = '_id';
   static final String word = 'word';
 }
 
-class Word{
+class Word {
   final int? id;
   final String word;
 
@@ -28,12 +26,12 @@ class Word{
       );
 
   static Word fromJson(Map<String, Object?> json) => Word(
-    id: json[WordFields.id] as int?,
-    word: json[WordFields.word] as String,
-  );
+        id: json[WordFields.id] as int?,
+        word: json[WordFields.word] as String,
+      );
 
   Map<String, Object?> toJson() => {
-    WordFields.id: id,
-    WordFields.word: word,
-  };
+        WordFields.id: id,
+        WordFields.word: word,
+      };
 }

@@ -50,7 +50,7 @@ class Results extends StatelessWidget {
   }
 }
 
-Future addWord(String word) async{
+Future addWord(String word) async {
   final newWord = Word(word: word);
 
   await WordsDatabase.instance.create(newWord);

@@ -3,7 +3,7 @@ description: Dictionary app using Free Dictionary API.
 
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
-version: 1.4.0+1
+version: 2.0.0+1
 
 environment:
   sdk: ">=2.12.0 <3.0.0"
@@ -13,10 +13,9 @@ dependencies:
     sdk: flutter
   sqflite: ^2.0.0+3
   path_provider: ^2.0.2
-
+  url_launcher: ^6.0.9
   cupertino_icons: ^1.0.3
   http: ^0.13.3
-  connectivity_plus: ^1.0.4
 
 dev_dependencies:
   flutter_test:

@@ -20,7 +20,7 @@ class PreviousWords extends StatelessWidget {
                   shadowColor: Colors.black,
                   elevation: 4,
                   child: ListTile(
-                    title: Text("\t\t"+item.word),
+                    title: Text("\t\t" + item.word),
                     trailing: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
@@ -28,7 +28,8 @@ class PreviousWords extends StatelessWidget {
                           color: Colors.blue,
                           icon: Icon(Icons.keyboard_arrow_right),
                           onPressed: () async {
-                            Navigator.push(context, MaterialPageRoute(builder: (context) {
+                            Navigator.push(context,
+                                MaterialPageRoute(builder: (context) {
                               return Results(item.word);
                             }));
                           },
@@ -40,7 +41,8 @@ class PreviousWords extends StatelessWidget {
                             await WordsDatabase.instance.delete(item.id);
 
                             Navigator.of(context).pop();
-                            Navigator.push(context, MaterialPageRoute(builder: (context) {
+                            Navigator.push(context,
+                                MaterialPageRoute(builder: (context) {
                               return PreviousWords();
                             }));
                           },
