@@ -69,6 +69,16 @@ class WordsDatabase{
     }
   }
 
+  Future<int> delete(int? id) async {
+    final db = await instance.database;
+
+    return await db.delete(
+        tableWords,
+        where: '${WordFields.id} = ?',
+        whereArgs: [id],
+    );
+  }
+
   Future close() async{
     final db = await instance.database;
 

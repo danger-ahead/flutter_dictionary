@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
+import 'package:flutter_dictionary/words.dart';
+import 'WordsDatabase.dart';
 import 'data.dart';
 import 'widgets/loading.dart';
 
@@ -20,6 +22,7 @@ class Results extends StatelessWidget {
           if (snapshot.data == null) {
             return loading; //Center
           } else {
+            addWord(word);
             var data = (snapshot.data as List<Data>).toList();
             return ListView.builder(
                 itemCount: data.length,
@@ -54,4 +57,10 @@ class Results extends StatelessWidget {
       ), //FutureBuilder
     ); //Scaffold
   }
+}
+
+Future addWord(String word) async{
+  final newWord = Word(word: word);
+
+  await WordsDatabase.instance.create(newWord);
 }
