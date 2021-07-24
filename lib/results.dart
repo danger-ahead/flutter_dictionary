@@ -42,11 +42,11 @@ class Results extends StatelessWidget {
                       ),
                     ),
                   ); //ListTile
-                }); //ListViw.builder
+                });
           }
         },
-      ), //FutureBuilder
-    ); //Scaffold
+      ),
+    );
   }
 }
 

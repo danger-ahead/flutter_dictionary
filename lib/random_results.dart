@@ -19,28 +19,36 @@ class RandomResults extends StatelessWidget {
                     return loading; //Center
                   } else {
                     var data = (snapshot.data as Random);
-                    return Text.rich(TextSpan(children: <TextSpan>[
-                      TextSpan(
-                        text: "UGHH! You didn't enter any word!\n",
-                        style: TextStyle(color: Colors.blue, fontSize: 20),
+                    return Card(
+                      elevation: 3,
+                      shadowColor: Colors.blueGrey,
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 24.0, horizontal: 8.0),
+                        child: Text.rich(TextSpan(children: <TextSpan>[
+                          TextSpan(
+                            text: "UGHH! You didn't enter any word!\n",
+                            style: TextStyle(color: Colors.blue, fontSize: 20),
+                          ),
+                          TextSpan(
+                            text: "But here's a word for you, \"" +
+                                data.word +
+                                "\".\n",
+                            style: TextStyle(color: Colors.black, fontSize: 16),
+                          ),
+                          TextSpan(
+                            text: "It means \"" + data.definition + "\".\n",
+                            style: TextStyle(color: Colors.black, fontSize: 16),
+                          ),
+                          TextSpan(
+                            text: "Wondering about the pronunciation? It's \"" +
+                                data.pronunciation +
+                                "\".",
+                            style: TextStyle(color: Colors.black, fontSize: 16),
+                          )
+                        ])),
                       ),
-                      TextSpan(
-                        text: "But here's a word for you, \"" +
-                            data.word +
-                            "\".\n",
-                        style: TextStyle(color: Colors.black, fontSize: 16),
-                      ),
-                      TextSpan(
-                        text: "It means \"" + data.definition + "\".\n",
-                        style: TextStyle(color: Colors.black, fontSize: 16),
-                      ),
-                      TextSpan(
-                        text: "Wondering about the pronunciation? It's \"" +
-                            data.pronunciation +
-                            "\".",
-                        style: TextStyle(color: Colors.black, fontSize: 16),
-                      )
-                    ]));
+                    );
                   }
                 }),
           ),

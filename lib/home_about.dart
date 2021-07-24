@@ -28,19 +28,23 @@ dynamic layoutHomeAbout(int selected, BuildContext context) {
           ),
         ),
       ),
-      Padding(
-        padding: const EdgeInsets.only(top: 20, left: 24, right: 24, bottom: 8),
-        child: ElevatedButton(
-            child: Text("Search!"),
-            onPressed: () async {
-              String word = _word.text;
-              _word.text = '';
-              Navigator.push(context, MaterialPageRoute(builder: (context) {
-                return word == '' ? RandomResults() : Results(word);
-              })); //MaterialPageRoute
-            }), //CupertinoButton
+      Row(
+        //Row has been used to make the ElevatedButton just large enough to fit the text inside it
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          ElevatedButton(
+              child: Text("Search!"),
+              onPressed: () async {
+                String word = _word.text;
+                _word.text = '';
+                Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  return word == '' ? RandomResults() : Results(word);
+                }));
+              }),
+        ],
       ), //Padding
-    ]), //SingleChildScrollView
+    ]),
     ListView(
       children: [
         Card(
