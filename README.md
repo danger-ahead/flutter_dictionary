@@ -1,7 +1,8 @@
 ## Flutter Dictionary
+#### My first Flutter project!
 
 ## Screenshots
-<img src="https://i.imgur.com/l02l5vq.png" width="230" height="475"/> <img src="https://i.imgur.com/Ior0s8Y.png" width="230" height="475"/> <img src="https://i.imgur.com/KZaGAJF.png" width="230" height="475"/> <img src="https://i.imgur.com/uvaQYaB.png" width="230" height="475"/> <img src="https://i.imgur.com/ZYnigTj.png" width="230" height="475"/>
+![](https://imgur.com/MHlm6me.png)![](https://imgur.com/VqJxrVW.png)![](https://imgur.com/ohZkdhx.png)![](https://imgur.com/cpSJq7P.png)![](https://imgur.com/c3aILdd.png)![](https://imgur.com/MOrtpSF.png)
 
 #### I've used [freeDictionaryAPI](https://github.com/meetDeveloper/freeDictionaryAPI) for fetching meanings.
 #### I've also used [Random-Words-API](https://github.com/mcnaveen/Random-Words-API) for fetching random words.
