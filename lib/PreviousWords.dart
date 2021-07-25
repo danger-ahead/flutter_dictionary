@@ -2,12 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dictionary/WordsDatabase.dart';
 import 'package:flutter_dictionary/results.dart';
 import 'package:flutter_dictionary/words.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class PreviousWords extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Previously searched words")),
+      appBar: AppBar(title: Text(
+        "History",
+        style: GoogleFonts.kosugi(),
+      )),
       body: FutureBuilder<List<Word>>(
         future: WordsDatabase.instance.readAllWords(),
         builder: (BuildContext context, AsyncSnapshot<List<Word>> snapshot) {
@@ -20,7 +24,10 @@ class PreviousWords extends StatelessWidget {
                   shadowColor: Colors.black,
                   elevation: 4,
                   child: ListTile(
-                    title: Text("\t\t" + item.word),
+                    title: Text(
+                      "\t\t" + item.word,
+                      style: GoogleFonts.overpassMono(),
+                    ),
                     trailing: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
@@ -35,7 +42,7 @@ class PreviousWords extends StatelessWidget {
                           },
                         ),
                         IconButton(
-                          color: Colors.blue,
+                          color: Colors.red,
                           icon: Icon(Icons.close),
                           onPressed: () async {
                             await WordsDatabase.instance.delete(item.id);
@@ -60,7 +67,12 @@ class PreviousWords extends StatelessWidget {
       ),
       bottomNavigationBar: BottomAppBar(
         child: TextButton(
-          child: Text("DELETE SEARCH HISTORY"),
+          child: Text(
+            "DELETE SEARCH HISTORY",
+            style: GoogleFonts.michroma(
+              color: Colors.red,
+            ),
+          ),
           onPressed: () async {
             await WordsDatabase.instance.deleteAll();
 

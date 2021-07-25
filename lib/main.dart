@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'home_about.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 void main() {
   runApp(MyApp());
@@ -37,7 +38,16 @@ class _MyHomePageState extends State<MyHomePage> {
       length: 2,
       child: Scaffold(
         appBar: AppBar(
-          title: Text("D I C T I O N A R Y"),
+          title: Text(
+            "dictionary",
+            style: GoogleFonts.concertOne(
+              textStyle: TextStyle(
+                fontSize: 30,
+                letterSpacing: 2.5,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+          ),
           centerTitle: true,
           bottom: TabBar(
             tabs: [

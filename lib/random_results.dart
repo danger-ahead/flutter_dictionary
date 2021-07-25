@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
-import 'widgets/loading.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'widgets/custom.dart';
 
 import 'random.dart';
 
@@ -8,7 +9,11 @@ class RandomResults extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(title: Text("Error :(")),
+        appBar: AppBar(
+            title: Text(
+          "Error :(",
+          style: GoogleFonts.michroma(),
+        )),
         body: Padding(
           padding: const EdgeInsets.all(10.0),
           child: Center(
@@ -16,7 +21,7 @@ class RandomResults extends StatelessWidget {
                 future: getRandomWord(),
                 builder: (context, snapshot) {
                   if (snapshot.data == null) {
-                    return loading; //Center
+                    return noWordError;
                   } else {
                     var data = (snapshot.data as Random);
                     return Card(

@@ -3,7 +3,7 @@ import 'package:flutter/painting.dart';
 import 'package:flutter_dictionary/words.dart';
 import 'WordsDatabase.dart';
 import 'data.dart';
-import 'widgets/loading.dart';
+import 'widgets/custom.dart';
 
 class Results extends StatelessWidget {
   static String word = '';
@@ -20,7 +20,7 @@ class Results extends StatelessWidget {
         future: getData(word.toString()),
         builder: (context, snapshot) {
           if (snapshot.data == null) {
-            return loading; //Center
+            return loading;
           } else {
             addWord(word);
             var data = (snapshot.data as List<Data>).toList();

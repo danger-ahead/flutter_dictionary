@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter_dictionary/PreviousWords.dart';
 import 'package:flutter_dictionary/random_results.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'results.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -34,7 +35,12 @@ dynamic layoutHomeAbout(int selected, BuildContext context) {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           ElevatedButton(
-              child: Text("Search!"),
+              child: Text(
+                "Search",
+                style: GoogleFonts.michroma(
+                  letterSpacing: 2,
+                ),
+              ),
               onPressed: () async {
                 String word = _word.text;
                 _word.text = '';
@@ -53,6 +59,7 @@ dynamic layoutHomeAbout(int selected, BuildContext context) {
           child: TextButton(
               child: Text(
                 "Previously searched words",
+                style: GoogleFonts.michroma(),
               ),
               onPressed: () {
                 Navigator.push(context, MaterialPageRoute(builder: (context) {
@@ -67,7 +74,7 @@ dynamic layoutHomeAbout(int selected, BuildContext context) {
             children: [
               ListTile(
                 leading: Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 4.0),
+                  padding: const EdgeInsets.symmetric(vertical: 1.0),
                   child: ClipRect(
                       child: Image.network(
                           'https://avatars.githubusercontent.com/u/55531939?v=4')),
@@ -75,7 +82,11 @@ dynamic layoutHomeAbout(int selected, BuildContext context) {
                 //ClipRect
                 title: Text(
                   "Hi, I'm Shourya!\nDICTIONARY is my first flutter project.",
-                  style: TextStyle(fontWeight: FontWeight.bold),
+                  style: GoogleFonts.poiretOne(
+                      textStyle: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 30,
+                  )),
                 ), //Text
               ),
               ButtonBar(
@@ -105,15 +116,22 @@ dynamic layoutHomeAbout(int selected, BuildContext context) {
                       );
 
                       var url = params.toString();
-                      if (await canLaunch(url)) {
-                        await launch(url);
-                      } else {
-                        throw 'Could not launch $url';
-                      }
+                      await canLaunch(url) ?
+                        await launch(url) : throw 'Could not launch $url';
                     },
                     icon: Image.network(
                       'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Email_Logo_PNG.png/640px-Email_Logo_PNG.png',
                       scale: 25,
+                    ),
+                  ),
+                  IconButton(
+                    onPressed: () async {
+                      await canLaunch(_telegram)
+                          ? await launch(_telegram,) : throw 'Could not launch $_telegram';
+                    },
+                    icon: Image.network(
+                      'https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Telegram_logo.svg/240px-Telegram_logo.svg.png',
+                      scale: 8,
                     ),
                   ),
                 ],
@@ -128,3 +146,4 @@ dynamic layoutHomeAbout(int selected, BuildContext context) {
 }
 
 const _github = 'https://github.com/danger-ahead/flutter_dictionary';
+String _telegram = "https://telegram.me/danger_ahead";
