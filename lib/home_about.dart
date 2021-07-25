@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
+import 'package:flutter_dictionary/widgets/NoNet.dart';
 import 'package:flutter_dictionary/PreviousWords.dart';
 import 'package:flutter_dictionary/random_results.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -42,6 +43,7 @@ dynamic layoutHomeAbout(int selected, BuildContext context) {
                 ),
               ),
               onPressed: () async {
+                detectNetStatus(context);
                 String word = _word.text;
                 _word.text = '';
                 Navigator.push(context, MaterialPageRoute(builder: (context) {
@@ -116,8 +118,9 @@ dynamic layoutHomeAbout(int selected, BuildContext context) {
                       );
 
                       var url = params.toString();
-                      await canLaunch(url) ?
-                        await launch(url) : throw 'Could not launch $url';
+                      await canLaunch(url)
+                          ? await launch(url)
+                          : throw 'Could not launch $url';
                     },
                     icon: Image.network(
                       'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Email_Logo_PNG.png/640px-Email_Logo_PNG.png',
@@ -127,7 +130,10 @@ dynamic layoutHomeAbout(int selected, BuildContext context) {
                   IconButton(
                     onPressed: () async {
                       await canLaunch(_telegram)
-                          ? await launch(_telegram,) : throw 'Could not launch $_telegram';
+                          ? await launch(
+                              _telegram,
+                            )
+                          : throw 'Could not launch $_telegram';
                     },
                     icon: Image.network(
                       'https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Telegram_logo.svg/240px-Telegram_logo.svg.png',
