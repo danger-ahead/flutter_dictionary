@@ -4,7 +4,6 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 
 Future<void> detectNetStatus(context) async {
   var connection = await (Connectivity().checkConnectivity());
-  print(connection);
 
   if (connection != ConnectivityResult.mobile &&
       connection != ConnectivityResult.wifi) {

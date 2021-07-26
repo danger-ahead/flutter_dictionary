@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter_dictionary/words.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'WordsDatabase.dart';
 import 'data.dart';
 import 'widgets/custom.dart';
@@ -28,18 +29,25 @@ class Results extends StatelessWidget {
                 itemCount: data.length,
                 itemBuilder: (context, i) {
                   return Card(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15.0),
+                    ),
                     shadowColor: Colors.black,
                     elevation: 8,
                     child: ListTile(
                       title: Text(
-                        data[i].partOfSpeech + "\n\n" + data[i].definition,
-                        style: TextStyle(
-                            color: Colors.black, fontWeight: FontWeight.bold),
-                      ),
-                      subtitle: Text(
-                        "Examples:\n\n" + data[i].example,
-                        style: TextStyle(fontWeight: FontWeight.bold),
-                      ),
+                          data[i].partOfSpeech + "\n\n" + data[i].definition,
+                          style: GoogleFonts.josefinSans(
+                            textStyle: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold),
+                            fontSize: 30,
+                          )),
+                      subtitle: Text("Examples:\n\n" + data[i].example,
+                          style: GoogleFonts.bigShouldersText(
+                            textStyle: TextStyle(fontWeight: FontWeight.bold),
+                            fontSize: 25,
+                          )),
                     ),
                   ); //ListTile
                 });

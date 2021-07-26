@@ -17,7 +17,7 @@
 - cupertino_icons
 
 #### Attributions:
-##### <a href="https://commons.wikimedia.org/wiki/File:Email_Logo_PNG.png">Pranav Kadu</a>, <a href="https://creativecommons.org/licenses/by-sa/4.0">CC BY-SA 4.0</a>, via Wikimedia Commons
+##### By Ha1992ya - Own work, CC BY-SA 4.0, https://commons.wikimedia.org/w/index.php?curid=47290666
 ##### [GitHub Logo](https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png)
-##### `icon.png` made by [Freepik](https://www.freepik.com) from [Flaticon](https://www.flaticon.com/)
+##### `icon.png, no-signal.png, no_word_error.png` by [Freepik](https://www.freepik.com) from [Flaticon](https://www.flaticon.com/)
 ##### `search.gif` from [icons8](https://icons8.com/preloaders)

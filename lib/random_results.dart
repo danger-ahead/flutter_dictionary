@@ -25,6 +25,9 @@ class RandomResults extends StatelessWidget {
                   } else {
                     var data = (snapshot.data as Random);
                     return Card(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15.0),
+                      ),
                       elevation: 3,
                       shadowColor: Colors.blueGrey,
                       child: Padding(
@@ -32,24 +35,36 @@ class RandomResults extends StatelessWidget {
                             vertical: 24.0, horizontal: 8.0),
                         child: Text.rich(TextSpan(children: <TextSpan>[
                           TextSpan(
-                            text: "UGHH! You didn't enter any word!\n",
-                            style: TextStyle(color: Colors.blue, fontSize: 20),
+                            text: "You didn't enter any word!\n\n",
+                            style: GoogleFonts.josefinSans(
+                              textStyle:
+                                  TextStyle(color: Colors.blue, fontSize: 30),
+                            ),
                           ),
                           TextSpan(
                             text: "But here's a word for you, \"" +
                                 data.word +
-                                "\".\n",
-                            style: TextStyle(color: Colors.black, fontSize: 16),
+                                "\".\n\n",
+                            style: GoogleFonts.bigShouldersText(
+                              textStyle:
+                                  TextStyle(color: Colors.black, fontSize: 25),
+                            ),
                           ),
                           TextSpan(
-                            text: "It means \"" + data.definition + "\".\n",
-                            style: TextStyle(color: Colors.black, fontSize: 16),
+                            text: "It means \"" + data.definition + "\".\n\n",
+                            style: GoogleFonts.bigShouldersText(
+                              textStyle:
+                                  TextStyle(color: Colors.black, fontSize: 25),
+                            ),
                           ),
                           TextSpan(
                             text: "Wondering about the pronunciation? It's \"" +
                                 data.pronunciation +
-                                "\".",
-                            style: TextStyle(color: Colors.black, fontSize: 16),
+                                "\".\n",
+                            style: GoogleFonts.bigShouldersText(
+                              textStyle:
+                                  TextStyle(color: Colors.black, fontSize: 25),
+                            ),
                           )
                         ])),
                       ),

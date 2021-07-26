@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
+import 'package:flutter_dictionary/widgets/CachedNetImage.dart';
 import 'package:flutter_dictionary/widgets/NoNet.dart';
 import 'package:flutter_dictionary/PreviousWords.dart';
 import 'package:flutter_dictionary/random_results.dart';
@@ -20,13 +21,23 @@ dynamic layoutHomeAbout(int selected, BuildContext context) {
         ),
       ),
       Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 24.0),
+        padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 16.0),
         child: TextField(
           controller: _word,
           textAlign: TextAlign.center,
+          cursorColor: Colors.white,
           decoration: InputDecoration(
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(25.0),
+              borderSide: BorderSide(
+                width: 0,
+                style: BorderStyle.none,
+              ),
+            ),
             filled: true,
-            helperText: 'Enter a word',
+            fillColor: Colors.lightGreen[400],
+            hintStyle: TextStyle(color: Colors.white),
+            hintText: 'Enter a word',
           ),
         ),
       ),
@@ -36,6 +47,11 @@ dynamic layoutHomeAbout(int selected, BuildContext context) {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           ElevatedButton(
+              style: ButtonStyle(
+                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                      RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(20),
+              ))),
               child: Text(
                 "Search",
                 style: GoogleFonts.michroma(
@@ -51,11 +67,14 @@ dynamic layoutHomeAbout(int selected, BuildContext context) {
                 }));
               }),
         ],
-      ), //Padding
+      ),
     ]),
     ListView(
       children: [
         Card(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(15.0),
+          ),
           shadowColor: Colors.black,
           elevation: 4,
           child: TextButton(
@@ -70,17 +89,21 @@ dynamic layoutHomeAbout(int selected, BuildContext context) {
               }),
         ),
         Card(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(15.0),
+          ),
           shadowColor: Colors.black,
           elevation: 4,
           child: Column(
             children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 8.0),
+                child: customNetImage(
+                    'https://lh3.googleusercontent.com/ogw/ADea4I7QpgCTJnwiZgv6ExWpzxWHljskDlkpPWQc8GgINjc=s200-c-mo',
+                    200.0,
+                    200.0),
+              ),
               ListTile(
-                leading: Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 1.0),
-                  child: ClipRect(
-                      child: Image.network(
-                          'https://avatars.githubusercontent.com/u/55531939?v=4')),
-                ),
                 //ClipRect
                 title: Text(
                   "Hi, I'm Shourya!\nDICTIONARY is my first flutter project.",
@@ -103,10 +126,10 @@ dynamic layoutHomeAbout(int selected, BuildContext context) {
                               enableDomStorage: true)
                           : throw 'Could not launch $_github';
                     },
-                    icon: Image.network(
-                      'https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png',
-                      scale: 15,
-                    ),
+                    icon: customNetImage(
+                        'https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png',
+                        80,
+                        80),
                   ),
                   IconButton(
                     onPressed: () async {
@@ -122,10 +145,10 @@ dynamic layoutHomeAbout(int selected, BuildContext context) {
                           ? await launch(url)
                           : throw 'Could not launch $url';
                     },
-                    icon: Image.network(
-                      'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Email_Logo_PNG.png/640px-Email_Logo_PNG.png',
-                      scale: 25,
-                    ),
+                    icon: customNetImage(
+                        'https://upload.wikimedia.org/wikipedia/commons/3/33/647403-email-128.png',
+                        80,
+                        80),
                   ),
                   IconButton(
                     onPressed: () async {
@@ -135,10 +158,10 @@ dynamic layoutHomeAbout(int selected, BuildContext context) {
                             )
                           : throw 'Could not launch $_telegram';
                     },
-                    icon: Image.network(
-                      'https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Telegram_logo.svg/240px-Telegram_logo.svg.png',
-                      scale: 8,
-                    ),
+                    icon: customNetImage(
+                        'https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Telegram_logo.svg/240px-Telegram_logo.svg.png',
+                        80,
+                        80),
                   ),
                 ],
               )

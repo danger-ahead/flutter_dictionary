@@ -38,6 +38,11 @@ class _MyHomePageState extends State<MyHomePage> {
       length: 2,
       child: Scaffold(
         appBar: AppBar(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.vertical(
+              bottom: Radius.circular(20),
+            ),
+          ),
           title: Text(
             "dictionary",
             style: GoogleFonts.concertOne(
@@ -50,6 +55,7 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
           centerTitle: true,
           bottom: TabBar(
+            indicatorColor: Colors.transparent,
             tabs: [
               Tab(
                 icon: Icon(Icons.home),
