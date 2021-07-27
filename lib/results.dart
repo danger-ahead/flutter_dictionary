@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'WordsDatabase.dart';
 import 'data.dart';
 import 'widgets/custom.dart';
+import 'package:assets_audio_player/assets_audio_player.dart';
 
 class Results extends StatelessWidget {
   static String word = '';
@@ -16,7 +17,16 @@ class Results extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Results")),
+      appBar: AppBar(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.vertical(
+              bottom: Radius.circular(15),
+            ),
+          ),
+          title: Text(
+            "Results",
+            style: GoogleFonts.michroma(),
+          )),
       body: FutureBuilder(
         future: getData(word.toString()),
         builder: (context, snapshot) {
@@ -35,6 +45,16 @@ class Results extends StatelessWidget {
                     shadowColor: Colors.black,
                     elevation: 8,
                     child: ListTile(
+                      trailing: IconButton(
+                        onPressed: () {
+                          final assetsAudioPlayer = AssetsAudioPlayer();
+                          assetsAudioPlayer.open(
+                            Audio.network(data[i].audioURL),
+                          );
+                          assetsAudioPlayer.play();
+                        },
+                        icon: Icon(Icons.volume_up),
+                      ),
                       title: Text(
                           data[i].partOfSpeech + "\n\n" + data[i].definition,
                           style: GoogleFonts.josefinSans(

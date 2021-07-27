@@ -10,10 +10,15 @@ class RandomResults extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.vertical(
+                bottom: Radius.circular(15),
+              ),
+            ),
             title: Text(
-          "Error :(",
-          style: GoogleFonts.michroma(),
-        )),
+              "Error :(",
+              style: GoogleFonts.michroma(),
+            )),
         body: Padding(
           padding: const EdgeInsets.all(10.0),
           child: Center(

@@ -9,10 +9,15 @@ class PreviousWords extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.vertical(
+              bottom: Radius.circular(10),
+            ),
+          ),
           title: Text(
-        "History",
-        style: GoogleFonts.kosugi(),
-      )),
+            "History",
+            style: GoogleFonts.kosugi(),
+          )),
       body: FutureBuilder<List<Word>>(
         future: WordsDatabase.instance.readAllWords(),
         builder: (BuildContext context, AsyncSnapshot<List<Word>> snapshot) {
@@ -22,6 +27,9 @@ class PreviousWords extends StatelessWidget {
               itemBuilder: (BuildContext context, int index) {
                 Word item = snapshot.data![index];
                 return Card(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(15.0),
+                  ),
                   shadowColor: Colors.black,
                   elevation: 4,
                   child: ListTile(
