@@ -14,10 +14,13 @@ dynamic layoutHomeAbout(int selected, BuildContext context) {
 
   List<Widget> widgetArray = [
     ListView(children: [
-      ClipRect(
-        child: Image.asset(
-          'images/icon.png',
-          scale: 2,
+      Padding(
+        padding: const EdgeInsets.only(top: 14.0),
+        child: ClipRect(
+          child: Image.asset(
+            'images/icon.png',
+            scale: 2,
+          ),
         ),
       ),
       Padding(
@@ -54,6 +57,7 @@ dynamic layoutHomeAbout(int selected, BuildContext context) {
               ))),
               child: Text(
                 "Search",
+                textScaleFactor: 1.3,
                 style: GoogleFonts.michroma(
                   letterSpacing: 2,
                 ),
@@ -80,6 +84,7 @@ dynamic layoutHomeAbout(int selected, BuildContext context) {
           child: TextButton(
               child: Text(
                 "Previously searched words",
+                textScaleFactor: 1.1,
                 style: GoogleFonts.michroma(),
               ),
               onPressed: () {
@@ -107,10 +112,10 @@ dynamic layoutHomeAbout(int selected, BuildContext context) {
                 //ClipRect
                 title: Text(
                   "Hi, I'm Shourya!\nDICTIONARY is my first flutter project.",
+                  textScaleFactor: 1.9,
                   style: GoogleFonts.poiretOne(
                       textStyle: TextStyle(
                     fontWeight: FontWeight.bold,
-                    fontSize: 30,
                   )),
                 ), //Text
               ),

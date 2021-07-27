@@ -35,6 +35,7 @@ class PreviousWords extends StatelessWidget {
                   child: ListTile(
                     title: Text(
                       "\t\t" + item.word,
+                      textScaleFactor: 1.2,
                       style: GoogleFonts.overpassMono(),
                     ),
                     trailing: Row(

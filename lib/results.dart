@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
-import 'package:flutter_dictionary/words.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'WordsDatabase.dart';
 import 'data.dart';
 import 'widgets/custom.dart';
 import 'package:assets_audio_player/assets_audio_player.dart';
+import 'package:share_plus/share_plus.dart';
 
 class Results extends StatelessWidget {
   static String word = '';
@@ -33,7 +32,6 @@ class Results extends StatelessWidget {
           if (snapshot.data == null) {
             return loading;
           } else {
-            addWord(word);
             var data = (snapshot.data as List<Data>).toList();
             return ListView.builder(
                 itemCount: data.length,
@@ -45,7 +43,7 @@ class Results extends StatelessWidget {
                     shadowColor: Colors.black,
                     elevation: 8,
                     child: ListTile(
-                      trailing: IconButton(
+                      leading: IconButton(
                         onPressed: () {
                           final assetsAudioPlayer = AssetsAudioPlayer();
                           assetsAudioPlayer.open(
@@ -55,18 +53,24 @@ class Results extends StatelessWidget {
                         },
                         icon: Icon(Icons.volume_up),
                       ),
+                      trailing: IconButton(
+                        onPressed: () {
+                          Share.share(data[i].listTile);
+                        },
+                        icon: Icon(Icons.share),
+                      ),
                       title: Text(
                           data[i].partOfSpeech + "\n\n" + data[i].definition,
+                          textScaleFactor: 1.8,
                           style: GoogleFonts.josefinSans(
                             textStyle: TextStyle(
                                 color: Colors.black,
                                 fontWeight: FontWeight.bold),
-                            fontSize: 30,
                           )),
                       subtitle: Text("Examples:\n\n" + data[i].example,
+                          textScaleFactor: 1.7,
                           style: GoogleFonts.bigShouldersText(
                             textStyle: TextStyle(fontWeight: FontWeight.bold),
-                            fontSize: 25,
                           )),
                     ),
                   ); //ListTile
@@ -76,10 +80,4 @@ class Results extends StatelessWidget {
       ),
     );
   }
-}
-
-Future addWord(String word) async {
-  final newWord = Word(word: word);
-
-  await WordsDatabase.instance.create(newWord);
 }
