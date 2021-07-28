@@ -1,6 +1,9 @@
 ## Flutter Dictionary
 #### My first Flutter project!
 
+#### Tested on Android: ✔️
+#### Tested on iOS: ❌
+
 ## Screenshots
 ![](https://imgur.com/MHlm6me.png)![](https://imgur.com/VqJxrVW.png)![](https://imgur.com/ohZkdhx.png)![](https://imgur.com/cpSJq7P.png)![](https://imgur.com/c3aILdd.png)![](https://imgur.com/MOrtpSF.png)
 

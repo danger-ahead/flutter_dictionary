@@ -38,40 +38,28 @@ class RandomResults extends StatelessWidget {
                       child: Padding(
                         padding: const EdgeInsets.symmetric(
                             vertical: 24.0, horizontal: 8.0),
-                        child: Text.rich(TextSpan(children: <TextSpan>[
-                          TextSpan(
-                            text: "You didn't enter any word!\n\n",
-                            style: GoogleFonts.josefinSans(
-                              textStyle:
-                                  TextStyle(color: Colors.blue, fontSize: 30),
+                        child: ListTile(
+                            title: Text(
+                              "You didn't enter any word!\n\n",
+                              textScaleFactor: 1.7,
+                              style: GoogleFonts.josefinSans(
+                                textStyle: TextStyle(color: Colors.blue),
+                              ),
                             ),
-                          ),
-                          TextSpan(
-                            text: "But here's a word for you, \"" +
-                                data.word +
-                                "\".\n\n",
-                            style: GoogleFonts.bigShouldersText(
-                              textStyle:
-                                  TextStyle(color: Colors.black, fontSize: 25),
-                            ),
-                          ),
-                          TextSpan(
-                            text: "It means \"" + data.definition + "\".\n\n",
-                            style: GoogleFonts.bigShouldersText(
-                              textStyle:
-                                  TextStyle(color: Colors.black, fontSize: 25),
-                            ),
-                          ),
-                          TextSpan(
-                            text: "Wondering about the pronunciation? It's \"" +
-                                data.pronunciation +
-                                "\".\n",
-                            style: GoogleFonts.bigShouldersText(
-                              textStyle:
-                                  TextStyle(color: Colors.black, fontSize: 25),
-                            ),
-                          )
-                        ])),
+                            subtitle: Text(
+                              "But here's a word for you, \"" +
+                                  data.word +
+                                  "\".\n\nIt means \"" +
+                                  data.definition +
+                                  "\".\n\n" +
+                                  "Wondering about the pronunciation? It's \"" +
+                                  data.pronunciation +
+                                  "\".\n",
+                              textScaleFactor: 1.6,
+                              style: GoogleFonts.bigShouldersText(
+                                textStyle: TextStyle(color: Colors.black),
+                              ),
+                            )),
                       ),
                     );
                   }
