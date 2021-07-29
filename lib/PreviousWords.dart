@@ -8,10 +8,12 @@ class PreviousWords extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.lightGreen[100],
       appBar: AppBar(
+          centerTitle: true,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.vertical(
-              bottom: Radius.circular(10),
+              bottom: Radius.circular(8),
             ),
           ),
           title: Text(
@@ -27,11 +29,12 @@ class PreviousWords extends StatelessWidget {
               itemBuilder: (BuildContext context, int index) {
                 Word item = snapshot.data![index];
                 return Card(
+                  color: Colors.yellow[50],
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(15.0),
+                    borderRadius: BorderRadius.circular(12.0),
                   ),
                   shadowColor: Colors.black,
-                  elevation: 4,
+                  elevation: 2,
                   child: ListTile(
                     title: Text(
                       "\t\t" + item.word,
@@ -76,6 +79,7 @@ class PreviousWords extends StatelessWidget {
         },
       ),
       bottomNavigationBar: BottomAppBar(
+        color: Colors.yellow[50],
         child: TextButton(
           child: Text(
             "DELETE SEARCH HISTORY",

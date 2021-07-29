@@ -15,12 +15,12 @@ class Results extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.green[100],
+      backgroundColor: Colors.lightGreen[100],
       appBar: AppBar(
           centerTitle: true,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.vertical(
-              bottom: Radius.circular(15),
+              bottom: Radius.circular(8),
             ),
           ),
           title: Text(

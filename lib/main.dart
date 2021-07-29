@@ -38,11 +38,11 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) => DefaultTabController(
       length: 2,
       child: Scaffold(
-        backgroundColor: Colors.green[100],
+        backgroundColor: Colors.lightGreen[100],
         appBar: AppBar(
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.vertical(
-              bottom: Radius.circular(15),
+              bottom: Radius.circular(8),
             ),
           ),
           title: Text(

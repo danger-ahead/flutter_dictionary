@@ -114,7 +114,7 @@ dynamic layoutHomeAbout(int selected, BuildContext context) {
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 8.0),
                 child: customNetImage(
-                    'https://lh3.googleusercontent.com/ogw/ADea4I7QpgCTJnwiZgv6ExWpzxWHljskDlkpPWQc8GgINjc=s200-c-mo',
+                    'https://lh3.googleusercontent.com/ogw/ADea4I7zbwFbA0doDuapQoIaYRU04bJ8o6ObrmyEkRmE8Ys=s300-c-mo',
                     150.0,
                     150.0),
               ),
