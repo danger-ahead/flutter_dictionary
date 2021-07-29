@@ -45,13 +45,14 @@ class WordsDatabase {
   Future<List<Word>> readAllWords() async {
     final db = await instance.database;
 
-    final orderBy = '${WordFields.id} ASC';
+    final orderBy = '${WordFields.id} DESC';
 
     final result = await db.query(tableWords, orderBy: orderBy);
 
     return result.map((json) => Word.fromJson(json)).toList();
   }
 
+  /* <---- NOT NEEDED IN THIS APP ---->
   Future<Word?> readWord(int id) async {
     final db = await instance.database;
 
@@ -68,6 +69,7 @@ class WordsDatabase {
       throw Exception('ID $id not found');
     }
   }
+  <---- x ----> */
 
   Future<int> delete(int? id) async {
     final db = await instance.database;

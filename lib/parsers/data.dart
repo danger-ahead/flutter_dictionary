@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:flutter_dictionary/words.dart';
 import 'package:http/http.dart' as http;
 
-import 'WordsDatabase.dart';
+import '../WordsDatabase.dart';
 
 class Data {
   final String partOfSpeech;
@@ -35,11 +35,11 @@ Future<List> getData(String s) async {
         definition += y["definition"] + "\n\n";
         y["example"] != null
             ? example += y["example"] + "\n\n"
-            : example += "*example not available*";
+            : example += "*example not available*  ";
       }
 
       definition = definition.substring(0, definition.length - 1);
-      example = example.substring(0, example.length - 1);
+      example = example.substring(0, example.length - 2);
 
       String listTile =
           x["partOfSpeech"] + "\n\n" + definition + "\n\n" + example;

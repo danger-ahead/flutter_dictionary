@@ -10,6 +10,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.green,
       ),
@@ -37,10 +38,11 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) => DefaultTabController(
       length: 2,
       child: Scaffold(
+        backgroundColor: Colors.green[100],
         appBar: AppBar(
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.vertical(
-              bottom: Radius.circular(20),
+              bottom: Radius.circular(15),
             ),
           ),
           title: Text(

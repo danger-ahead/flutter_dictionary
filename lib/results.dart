@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'data.dart';
-import 'widgets/custom.dart';
+import 'parsers/data.dart';
 import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:share_plus/share_plus.dart';
 
@@ -16,7 +15,9 @@ class Results extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.green[100],
       appBar: AppBar(
+          centerTitle: true,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.vertical(
               bottom: Radius.circular(15),
@@ -30,13 +31,14 @@ class Results extends StatelessWidget {
         future: getData(word.toString()),
         builder: (context, snapshot) {
           if (snapshot.data == null) {
-            return loading;
+            return Center(child: CircularProgressIndicator());
           } else {
             var data = (snapshot.data as List<Data>).toList();
             return ListView.builder(
                 itemCount: data.length,
                 itemBuilder: (context, i) {
                   return Card(
+                    color: Colors.yellow[50],
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(15.0),
                     ),
@@ -44,6 +46,7 @@ class Results extends StatelessWidget {
                     elevation: 8,
                     child: ListTile(
                       leading: IconButton(
+                        color: Colors.blue,
                         onPressed: () {
                           final assetsAudioPlayer = AssetsAudioPlayer();
                           assetsAudioPlayer.open(

@@ -42,6 +42,4 @@ flutter:
 
   assets:
     - images/icon.png
-    - images/search.gif
-    - images/no_word_error.png
     - images/no-signal.png

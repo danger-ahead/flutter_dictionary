@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'widgets/custom.dart';
-
-import 'random.dart';
+import 'parsers/random.dart';
 
 class RandomResults extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: Colors.green[100],
         appBar: AppBar(
+            centerTitle: true,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.vertical(
                 bottom: Radius.circular(15),
@@ -26,10 +26,11 @@ class RandomResults extends StatelessWidget {
                 future: getRandomWord(),
                 builder: (context, snapshot) {
                   if (snapshot.data == null) {
-                    return noWordError;
+                    return CircularProgressIndicator();
                   } else {
                     var data = (snapshot.data as Random);
                     return Card(
+                      color: Colors.yellow[50],
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(15.0),
                       ),
