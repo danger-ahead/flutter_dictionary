@@ -7,9 +7,11 @@ import 'package:share_plus/share_plus.dart';
 
 class Results extends StatelessWidget {
   static String word = '';
+  static String language = 'en_US';
 
-  Results(String pass) {
+  Results(String pass, String choice) {
     word = pass;
+    language = choice;
   }
 
   @override
@@ -28,7 +30,7 @@ class Results extends StatelessWidget {
             style: GoogleFonts.michroma(),
           )),
       body: FutureBuilder(
-        future: getData(word.toString()),
+        future: getData(word, language),
         builder: (context, snapshot) {
           if (snapshot.data == null) {
             return Center(child: CircularProgressIndicator());

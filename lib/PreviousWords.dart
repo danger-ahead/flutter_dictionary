@@ -50,7 +50,7 @@ class PreviousWords extends StatelessWidget {
                           onPressed: () async {
                             Navigator.push(context,
                                 MaterialPageRoute(builder: (context) {
-                              return Results(item.word);
+                              return Results(item.word, '');
                             }));
                           },
                         ),

@@ -11,6 +11,12 @@ import 'package:url_launcher/url_launcher.dart';
 
 dynamic layoutHomeAbout(int selected, BuildContext context) {
   TextEditingController _word = TextEditingController();
+  String choice = 'en_US';
+
+  callSetState(String _choice){
+    choice = _choice;
+    print(choice);
+  }
 
   List<Widget> widgetArray = [
     LayoutBuilder(
@@ -45,6 +51,23 @@ dynamic layoutHomeAbout(int selected, BuildContext context) {
                           _word.text = '';
                         },
                       ),
+                      prefixIcon: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                        child: DropdownButton<String>(
+                          value: choice,
+                          elevation: 16,
+                          onChanged: (String? newValue) {
+                            callSetState(newValue!);
+                          },
+                          items: <String>['en_US', 'en_GB', 'es', 'fr', 'ru', 'de', 'it', 'hi', 'ja', 'ar', 'ko']
+                              .map<DropdownMenuItem<String>>((String value) {
+                            return DropdownMenuItem<String>(
+                              value: value,
+                              child: Text(value),
+                            );
+                          }).toList(),
+                        ),
+                      ),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10.0),
                       ),
@@ -70,7 +93,7 @@ dynamic layoutHomeAbout(int selected, BuildContext context) {
                           _word.text = '';
                           Navigator.push(context,
                               MaterialPageRoute(builder: (context) {
-                            return word == '' ? RandomResults() : Results(word);
+                            return word == '' ? RandomResults() : Results(word, choice);
                           }));
                         }),
                   ),

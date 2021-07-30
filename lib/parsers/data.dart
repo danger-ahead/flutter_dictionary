@@ -15,15 +15,15 @@ class Data {
       this.listTile);
 }
 
-Future<List> getData(String s) async {
+Future<List> getData(String word, String language) async {
   var response = await http
-      .get(Uri.https('api.dictionaryapi.dev', 'api/v2/entries/en_US/' + s));
+      .get(Uri.https('api.dictionaryapi.dev', 'api/v2/entries/' + language + '/' + word));
   var jsonData = jsonDecode(response.body)[0];
 
   List<Data> data = [];
 
   if (jsonData != null) {
-    addWord(s);
+    addWord(word);
     var phonetics = jsonData["phonetics"][0];
 
     for (var x in jsonData["meanings"]) {
@@ -44,7 +44,7 @@ Future<List> getData(String s) async {
       String listTile =
           x["partOfSpeech"] + "\n\n" + definition + "\n\n" + example;
       Data d = Data(
-          x["partOfSpeech"], definition, example, phonetics["audio"], listTile);
+          x["partOfSpeech"], definition, example, phonetics["audio"] == null ? '' : phonetics["audio"], listTile);
       data.add(d);
     }
   } else {
