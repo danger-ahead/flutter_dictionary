@@ -10,8 +10,42 @@ class Results extends StatelessWidget {
   static String language = 'en_US';
 
   Results(String pass, String choice) {
+    switch (choice) {
+      case 'English (US)':
+        language = 'en_US';
+        break;
+      case 'English (UK)':
+        language = 'en_GB';
+        break;
+      case 'French':
+        language = 'fr';
+        break;
+      case 'German':
+        language = 'de';
+        break;
+      case 'Italian':
+        language = 'it';
+        break;
+      case 'Hindi':
+        language = 'hi';
+        break;
+      case 'Russian':
+        language = 'ru';
+        break;
+      case 'Spanish':
+        language = 'es';
+        break;
+      case 'Korean':
+        language = 'ko';
+        break;
+      case 'Arabic':
+        language = 'ar';
+        break;
+      case 'Japanese':
+        language = 'ja';
+        break;
+    }
     word = pass;
-    language = choice;
   }
 
   @override

@@ -11,11 +11,10 @@ import 'package:url_launcher/url_launcher.dart';
 
 dynamic layoutHomeAbout(int selected, BuildContext context) {
   TextEditingController _word = TextEditingController();
-  String choice = 'en_US';
+  String choice = 'English (US)';
 
-  callSetState(String _choice){
+  callSetState(String _choice) {
     choice = _choice;
-    print(choice);
   }
 
   List<Widget> widgetArray = [
@@ -52,15 +51,28 @@ dynamic layoutHomeAbout(int selected, BuildContext context) {
                         },
                       ),
                       prefixIcon: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                        padding: const EdgeInsets.only(left: 12.0),
                         child: DropdownButton<String>(
+                          dropdownColor: Colors.yellow[50],
+                          underline: SizedBox(),
                           value: choice,
                           elevation: 16,
                           onChanged: (String? newValue) {
                             callSetState(newValue!);
                           },
-                          items: <String>['en_US', 'en_GB', 'es', 'fr', 'ru', 'de', 'it', 'hi', 'ja', 'ar', 'ko']
-                              .map<DropdownMenuItem<String>>((String value) {
+                          items: <String>[
+                            'English (US)',
+                            'English (UK)',
+                            'Spanish',
+                            'French',
+                            'Russian',
+                            'German',
+                            'Italian',
+                            'Hindi',
+                            'Japanese',
+                            'Arabic',
+                            'Korean'
+                          ].map<DropdownMenuItem<String>>((String value) {
                             return DropdownMenuItem<String>(
                               value: value,
                               child: Text(value),
@@ -70,6 +82,7 @@ dynamic layoutHomeAbout(int selected, BuildContext context) {
                       ),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10.0),
+                        borderSide: BorderSide(color: Colors.green, width: 8.0),
                       ),
                       filled: true,
                       fillColor: Colors.yellow[50],
@@ -93,7 +106,9 @@ dynamic layoutHomeAbout(int selected, BuildContext context) {
                           _word.text = '';
                           Navigator.push(context,
                               MaterialPageRoute(builder: (context) {
-                            return word == '' ? RandomResults() : Results(word, choice);
+                            return word == ''
+                                ? RandomResults()
+                                : Results(word, choice);
                           }));
                         }),
                   ),
