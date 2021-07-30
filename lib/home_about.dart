@@ -13,73 +13,73 @@ dynamic layoutHomeAbout(int selected, BuildContext context) {
   TextEditingController _word = TextEditingController();
 
   List<Widget> widgetArray = [
-    Stack(
-      children: [
-        Align(
-          alignment: Alignment.topCenter,
-          child: Padding(
-            padding: const EdgeInsets.only(top: 56.0, bottom: 8),
-            child: ClipRect(
-              child: Image.asset(
-                "images/icon.png",
-                scale: 2,
-              ),
+    LayoutBuilder(
+      builder: (context, viewportConstraints) {
+        return SingleChildScrollView(
+          child: ConstrainedBox(
+            constraints: viewportConstraints.copyWith(
+              minHeight: viewportConstraints.maxHeight,
+              maxHeight: double.infinity,
             ),
-          ),
-        ),
-        Align(
-          alignment: Alignment(0, .8),
-          child: ListView(
-            shrinkWrap: true,
-            children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(
-                    horizontal: 24.0, vertical: 12.0),
-                child: TextField(
-                  controller: _word,
-                  textAlign: TextAlign.center,
-                  decoration: InputDecoration(
-                    suffixIcon: IconButton(
-                      color: Colors.green,
-                      icon: Icon(Icons.close),
-                      onPressed: () {
-                        _word.text = '';
-                      },
-                    ),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10.0),
-                    ),
-                    filled: true,
-                    fillColor: Colors.yellow[50],
-                    hintStyle: TextStyle(color: Colors.green),
-                    hintText: 'Enter a word',
+            child: Flex(
+              direction: Axis.vertical,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                ClipRect(
+                  child: Image.asset(
+                    "images/icon.png",
+                    scale: 2,
                   ),
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(bottom: 6),
-                child: ConstrainedBox(
-                  constraints: BoxConstraints.tightFor(width: 65, height: 65),
-                  child: ElevatedButton(
-                      style: ButtonStyle(
-                          shape: MaterialStateProperty.all<CircleBorder>(
-                              CircleBorder())),
-                      child: Icon(Icons.search),
-                      onPressed: () async {
-                        detectNetStatus(context);
-                        String word = _word.text;
-                        _word.text = '';
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (context) {
-                          return word == '' ? RandomResults() : Results(word);
-                        }));
-                      }),
+                Padding(
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 10.0, vertical: 30.0),
+                  child: TextField(
+                    controller: _word,
+                    textAlign: TextAlign.center,
+                    decoration: InputDecoration(
+                      suffixIcon: IconButton(
+                        color: Colors.green,
+                        icon: Icon(Icons.close),
+                        onPressed: () {
+                          _word.text = '';
+                        },
+                      ),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+                      filled: true,
+                      fillColor: Colors.yellow[50],
+                      hintStyle: TextStyle(color: Colors.green),
+                      hintText: 'Enter a word',
+                    ),
+                  ),
                 ),
-              ),
-            ],
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 10.0),
+                  child: ConstrainedBox(
+                    constraints: BoxConstraints.tightFor(width: 65, height: 65),
+                    child: ElevatedButton(
+                        style: ButtonStyle(
+                            shape: MaterialStateProperty.all<CircleBorder>(
+                                CircleBorder())),
+                        child: Icon(Icons.search),
+                        onPressed: () async {
+                          detectNetStatus(context);
+                          String word = _word.text;
+                          _word.text = '';
+                          Navigator.push(context,
+                              MaterialPageRoute(builder: (context) {
+                            return word == '' ? RandomResults() : Results(word);
+                          }));
+                        }),
+                  ),
+                ),
+              ],
+            ),
           ),
-        ),
-      ],
+        );
+      },
     ),
     ListView(
       children: [
