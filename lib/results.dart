@@ -82,7 +82,8 @@ class Results extends StatelessWidget {
                     elevation: 8,
                     child: ListTile(
                       leading: IconButton(
-                        color: Colors.blue,
+                        color:
+                            data[i].audioURL != '' ? Colors.blue : Colors.grey,
                         onPressed: () {
                           final assetsAudioPlayer = AssetsAudioPlayer();
                           assetsAudioPlayer.open(
@@ -90,9 +91,12 @@ class Results extends StatelessWidget {
                           );
                           assetsAudioPlayer.play();
                         },
-                        icon: Icon(Icons.volume_up),
+                        icon: data[i].audioURL != ''
+                            ? Icon(Icons.volume_up_rounded)
+                            : Icon(Icons.volume_off_rounded),
                       ),
                       trailing: IconButton(
+                        color: Colors.blue,
                         onPressed: () {
                           Share.share(data[i].listTile);
                         },

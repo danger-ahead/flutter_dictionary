@@ -18,34 +18,40 @@ class Data {
 Future<List> getData(String word, String language) async {
   var response = await http.get(Uri.https(
       'api.dictionaryapi.dev', 'api/v2/entries/' + language + '/' + word));
-  var jsonData = jsonDecode(response.body)[0];
+  var information = jsonDecode(response.body);
 
   List<Data> data = [];
 
-  if (jsonData != null) {
+  if (information is List) {
     addWord(word);
-    var phonetics = jsonData["phonetics"][0];
+    for (var jsonData in information) {
+      var phonetics;
+      if (jsonData["phonetics"].length > 0)
+        phonetics = jsonData["phonetics"][0];
+      else
+        phonetics = {'audio': ''};
 
-    for (var x in jsonData["meanings"]) {
-      String definition = '';
-      String example = '';
+      for (var x in jsonData["meanings"]) {
+        String definition = '';
+        String example = '';
 
-      var definitions = x["definitions"];
-      for (var y in definitions) {
-        definition += y["definition"] + "\n\n";
-        y["example"] != null
-            ? example += y["example"] + "\n\n"
-            : example += "*example not available*  ";
+        var definitions = x["definitions"];
+        for (var y in definitions) {
+          definition += y["definition"] + "\n\n";
+          y["example"] != null
+              ? example += y["example"] + "\n\n"
+              : example += "*example not available*  ";
+        }
+
+        definition = definition.substring(0, definition.length - 1);
+        example = example.substring(0, example.length - 2);
+
+        String listTile =
+            x["partOfSpeech"] + "\n\n" + definition + "\n\n" + example;
+        Data d = Data(x["partOfSpeech"], definition, example,
+            phonetics["audio"] == null ? '' : phonetics["audio"], listTile);
+        data.add(d);
       }
-
-      definition = definition.substring(0, definition.length - 1);
-      example = example.substring(0, example.length - 2);
-
-      String listTile =
-          x["partOfSpeech"] + "\n\n" + definition + "\n\n" + example;
-      Data d = Data(x["partOfSpeech"], definition, example,
-          phonetics["audio"] == null ? '' : phonetics["audio"], listTile);
-      data.add(d);
     }
   } else {
     Data d = Data('ERROR', 'Could not find a definition\n',
