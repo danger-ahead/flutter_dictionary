@@ -36,9 +36,19 @@ class PreviousWords extends StatelessWidget {
                   shadowColor: Colors.black,
                   elevation: 2,
                   child: ListTile(
+                    onTap: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) {
+                        return Results(item.word, item.lang);
+                      }));
+                    },
                     title: Text(
                       "\t\t" + item.word,
                       textScaleFactor: 1.2,
+                      style: GoogleFonts.overpassMono(),
+                    ),
+                    subtitle: Text(
+                      "\t\tlanguage:\t" + item.lang,
                       style: GoogleFonts.overpassMono(),
                     ),
                     trailing: IconButton(

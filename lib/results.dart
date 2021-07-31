@@ -7,7 +7,7 @@ import 'package:share_plus/share_plus.dart';
 
 class Results extends StatelessWidget {
   static String word = '';
-  static String language = 'en_US';
+  static String language = '';
 
   Results(String pass, String choice) {
     switch (choice) {
@@ -44,6 +44,8 @@ class Results extends StatelessWidget {
       case 'Japanese':
         language = 'ja';
         break;
+      default:
+        language = choice;
     }
     word = pass;
   }

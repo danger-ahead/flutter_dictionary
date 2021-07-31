@@ -23,7 +23,7 @@ Future<List> getData(String word, String language) async {
   List<Data> data = [];
 
   if (information is List) {
-    addWord(word);
+    addWord(word, language);
     for (var jsonData in information) {
       var phonetics;
       if (jsonData["phonetics"].length > 0)
@@ -61,8 +61,8 @@ Future<List> getData(String word, String language) async {
   return data;
 }
 
-Future addWord(String word) async {
-  final newWord = Word(word: word);
+Future addWord(String word, String language) async {
+  final newWord = Word(word: word, lang: language);
 
   await WordsDatabase.instance.create(newWord);
 }

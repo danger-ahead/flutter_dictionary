@@ -25,12 +25,12 @@ class WordsDatabase {
 
   Future _createDB(Database db, int version) async {
     final idType = 'INTEGER PRIMARY KEY AUTOINCREMENT';
-    final wordType = 'TEXT NOT NULL';
-
+    final textType = 'TEXT NOT NULL';
     await db.execute('''
     CREATE TABLE $tableWords(
       ${WordFields.id} $idType,
-      ${WordFields.word} $wordType
+      ${WordFields.word} $textType,
+      ${WordFields.lang} $textType
     )
     ''');
   }
