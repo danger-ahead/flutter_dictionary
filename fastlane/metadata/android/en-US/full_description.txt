@@ -1,0 +1,3 @@
+A completely free open-source dictionary app supporting multiple languages.
+Supported languages - English (US), English (UK), French, Russian, Spanish, Italian, German, Japanese, Korean, Hindi and Arabic.
+Also has audio pronunciations feature for English .
