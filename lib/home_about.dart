@@ -91,8 +91,8 @@ dynamic layoutHomeAbout(int selected, BuildContext context) {
                     ),
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 10.0),
+                Center(
+                  //https://stackoverflow.com/a/68510802/10951873
                   child: ConstrainedBox(
                     constraints: BoxConstraints.tightFor(width: 65, height: 65),
                     child: ElevatedButton(
