@@ -1,7 +1,7 @@
 name: flutter_dictionary
 description: Dictionary app using Free Dictionary API.
 
-publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+publish_to: "none" # Remove this line if you wish to publish to pub.dev
 
 version: 1.1.0+2
 
@@ -11,16 +11,16 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  sqflite: ^2.0.0+3
-  path_provider: ^2.0.2
-  url_launcher: ^6.0.9
+  sqflite: ^2.3.0
+  path_provider: ^2.0.15
+  url_launcher: ^6.1.12
   cupertino_icons: ^1.0.3
-  share_plus: ^2.1.4
-  http: ^0.13.3
-  google_fonts: ^2.1.0
-  connectivity_plus: ^1.0.6
-  cached_network_image: ^3.1.0
-  assets_audio_player: ^3.0.3+6
+  share_plus: ^7.0.2
+  http: ^1.1.0
+  google_fonts: ^5.1.0
+  connectivity_plus: ^4.0.1
+  cached_network_image: ^3.2.3
+  audioplayers: ^5.0.0
 
 dev_dependencies:
   flutter_test:
@@ -37,7 +37,6 @@ flutter_icons:
   image_path: "images/icon.png"
 
 flutter:
-
   uses-material-design: true
 
   assets:

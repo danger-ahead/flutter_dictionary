@@ -1,8 +1,7 @@
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/painting.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'parsers/data.dart';
-import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:share_plus/share_plus.dart';
 
 class Results extends StatelessWidget {
@@ -86,12 +85,9 @@ class Results extends StatelessWidget {
                       leading: IconButton(
                         color:
                             data[i].audioURL != '' ? Colors.blue : Colors.grey,
-                        onPressed: () {
-                          final assetsAudioPlayer = AssetsAudioPlayer();
-                          assetsAudioPlayer.open(
-                            Audio.network(data[i].audioURL),
-                          );
-                          assetsAudioPlayer.play();
+                        onPressed: () async {
+                          final player = AudioPlayer();
+                          await player.play(UrlSource(data[i].audioURL));
                         },
                         icon: data[i].audioURL != ''
                             ? Icon(Icons.volume_up_rounded)
