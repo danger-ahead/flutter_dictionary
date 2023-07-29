@@ -1,3 +1,4 @@
+// import 'package:audioplayers/audioplayers.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -52,7 +53,6 @@ class Results extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.lightGreen[100],
       appBar: AppBar(
           centerTitle: true,
           shape: RoundedRectangleBorder(
@@ -74,45 +74,71 @@ class Results extends StatelessWidget {
             return ListView.builder(
                 itemCount: data.length,
                 itemBuilder: (context, i) {
-                  return Card(
-                    color: Colors.yellow[50],
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(15.0),
-                    ),
-                    shadowColor: Colors.black,
-                    elevation: 8,
-                    child: ListTile(
-                      leading: IconButton(
-                        color:
-                            data[i].audioURL != '' ? Colors.blue : Colors.grey,
-                        onPressed: () async {
-                          final player = AudioPlayer();
-                          await player.play(UrlSource(data[i].audioURL));
-                        },
-                        icon: data[i].audioURL != ''
-                            ? Icon(Icons.volume_up_rounded)
-                            : Icon(Icons.volume_off_rounded),
+                  return Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: Card(
+                      child: Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
+                              children: [
+                                Expanded(
+                                  child: Text(data[i].partOfSpeech,
+                                      textScaleFactor: 1.8,
+                                      style: GoogleFonts.josefinSans(
+                                        textStyle: TextStyle(
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.bold),
+                                      )),
+                                ),
+                                Row(
+                                  children: [
+                                    IconButton(
+                                      color: data[i].audioURL != ''
+                                          ? Colors.blue
+                                          : Colors.grey,
+                                      onPressed: () async {
+                                        print(data[i].audioURL);
+                                        final player = AudioPlayer();
+                                        await player
+                                            .play(UrlSource(data[i].audioURL));
+                                      },
+                                      icon: data[i].audioURL != ''
+                                          ? Icon(Icons.volume_up_rounded)
+                                          : Icon(Icons.volume_off_rounded),
+                                    ),
+                                    IconButton(
+                                      color: Colors.blue,
+                                      onPressed: () {
+                                        Share.share(data[i].listTile);
+                                      },
+                                      icon: Icon(Icons.share),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                            Text(
+                              data[i].definition,
+                              textScaleFactor: 1.7,
+                              style: GoogleFonts.bigShouldersText(
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            Text(
+                              "Examples:",
+                              style: GoogleFonts.bigShouldersText(fontSize: 20),
+                            ),
+                            Text(data[i].example,
+                                style: GoogleFonts.bigShouldersText(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 16,
+                                )),
+                          ],
+                        ),
                       ),
-                      trailing: IconButton(
-                        color: Colors.blue,
-                        onPressed: () {
-                          Share.share(data[i].listTile);
-                        },
-                        icon: Icon(Icons.share),
-                      ),
-                      title: Text(
-                          data[i].partOfSpeech + "\n\n" + data[i].definition,
-                          textScaleFactor: 1.8,
-                          style: GoogleFonts.josefinSans(
-                            textStyle: TextStyle(
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold),
-                          )),
-                      subtitle: Text("Examples:\n\n" + data[i].example,
-                          textScaleFactor: 1.7,
-                          style: GoogleFonts.bigShouldersText(
-                            textStyle: TextStyle(fontWeight: FontWeight.bold),
-                          )),
                     ),
                   ); //ListTile
                 });
