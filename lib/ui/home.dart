@@ -16,11 +16,9 @@ class Home extends StatelessWidget {
               title: Text(
                 "dictionary",
                 style: GoogleFonts.concertOne(
-                  textStyle: TextStyle(
-                    fontSize: 26,
-                    letterSpacing: 2.5,
-                    fontWeight: FontWeight.w500,
-                  ),
+                  fontSize: 26,
+                  letterSpacing: 2.5,
+                  fontWeight: FontWeight.w500,
                 ),
               ),
               centerTitle: true,

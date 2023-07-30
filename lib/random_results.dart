@@ -8,10 +8,18 @@ class RandomResults extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-            centerTitle: true,
+            leading: IconButton(
+              icon: Padding(
+                padding: const EdgeInsets.only(top: 12.0),
+                child: Icon(Icons.arrow_back_ios),
+              ),
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            ),
             title: Text(
               "Error :(",
-              style: GoogleFonts.michroma(),
+              style: GoogleFonts.concertOne(),
             )),
         body: Padding(
           padding: const EdgeInsets.all(10.0),
