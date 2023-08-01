@@ -6,7 +6,7 @@ import 'package:flutter_dictionary/providers.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class PreviousWords extends StatelessWidget {
+class PreviousWordsView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Consumer(

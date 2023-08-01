@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dictionary/constants/strings.dart';
-import 'package:flutter_dictionary/widgets/CachedNetImage.dart';
+import 'package:flutter_dictionary/widgets/cached_net_image.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -11,18 +11,23 @@ class AboutView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(10.0),
-      child: Card(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Text(
-              "Dictionary",
-              style: GoogleFonts.poiretOne(
-                fontSize: 30.0,
-                fontWeight: FontWeight.bold,
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Card(
+            child: SizedBox(
+              width: double.infinity,
+              child: Text(
+                "Dictionary",
+                style: GoogleFonts.poiretOne(
+                  fontSize: 30.0,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
-            ), //Text
-            ButtonBar(
+            ),
+          ), //Text
+          Card(
+            child: ButtonBar(
               alignment: MainAxisAlignment.spaceEvenly,
               children: [
                 IconButton(
@@ -32,25 +37,26 @@ class AboutView extends StatelessWidget {
                           enableJavaScript: true,
                         ));
                   },
-                  icon: customNetImage(
-                      'https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png',
-                      80,
-                      80),
+                  icon: CachedNetImage(
+                      url:
+                          'https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png',
+                      width: 40,
+                      height: 40),
                 ),
                 IconButton(
                   onPressed: () async {
                     final Uri params = Uri(
                       scheme: 'mailto',
                       path: 'danger.ahead@pm.me',
-                      query:
-                          'subject=DICTIONARY Feedback', //add subject and body here
+                      query: 'subject=DICTIONARY Feedback',
                     );
                     await launchUrl(Uri.parse(params.toString()));
                   },
-                  icon: customNetImage(
-                      'https://upload.wikimedia.org/wikipedia/commons/3/33/647403-email-128.png',
-                      80,
-                      80),
+                  icon: CachedNetImage(
+                      url:
+                          'https://upload.wikimedia.org/wikipedia/commons/3/33/647403-email-128.png',
+                      width: 40,
+                      height: 40),
                 ),
                 IconButton(
                   onPressed: () async {
@@ -58,15 +64,16 @@ class AboutView extends StatelessWidget {
                       Uri.parse(StringConstants.developerTelegram),
                     );
                   },
-                  icon: customNetImage(
-                      'https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Telegram_logo.svg/240px-Telegram_logo.svg.png',
-                      80,
-                      80),
+                  icon: CachedNetImage(
+                      url:
+                          'https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Telegram_logo.svg/240px-Telegram_logo.svg.png',
+                      width: 40,
+                      height: 40),
                 ),
               ],
-            )
-          ],
-        ),
+            ),
+          )
+        ],
       ),
     );
   }

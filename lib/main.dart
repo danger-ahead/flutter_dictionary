@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dictionary/constants/strings.dart';
-import 'package:flutter_dictionary/random_results.dart';
-import 'package:flutter_dictionary/results.dart';
+import 'package:flutter_dictionary/ui/random_word.dart';
+import 'package:flutter_dictionary/ui/results.dart';
 import 'package:flutter_dictionary/ui/home.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

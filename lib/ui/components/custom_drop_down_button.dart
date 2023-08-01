@@ -27,9 +27,7 @@ class _CustomDropdownButtonState extends State<CustomDropdownButton> {
       value: _choice,
       isDense: true,
       decoration: InputDecoration(
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(10.0),
-        ),
+        border: OutlineInputBorder(),
         labelText: widget.labelText,
       ),
       onChanged: (String? newValue) {
