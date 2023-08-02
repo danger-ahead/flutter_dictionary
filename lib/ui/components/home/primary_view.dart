@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dictionary/constants/strings.dart';
 import 'package:flutter_dictionary/controllers/fetch_words_repository_controller.dart';
+import 'package:flutter_dictionary/controllers/primary_view_controller.dart';
 import 'package:flutter_dictionary/providers.dart';
 import 'package:flutter_dictionary/ui/components/custom_drop_down_button.dart';
 import 'package:flutter_dictionary/widgets/no_net.dart';
@@ -25,6 +26,7 @@ class PrimaryView extends StatelessWidget {
                 ref.watch(fetchWordsRepositoryController.notifier);
 
             final dropDownChoice = ref.watch(customDropDownProvider);
+            final primaryView = ref.watch(primaryViewProvider);
 
             return Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -57,15 +59,40 @@ class PrimaryView extends StatelessWidget {
                         ),
                         TextFormField(
                           controller: fetchWordsRepositoryCtrl.word,
+                          textInputAction: TextInputAction.search,
                           validator: (value) {
                             if (value == null || value.isEmpty) {
                               return 'Please enter a word';
                             }
                             return null;
                           },
+                          onChanged: (value) {
+                            if (value.isNotEmpty) {
+                              primaryView.setPrimaryViewState(
+                                  showClearButton: true);
+                            } else {
+                              primaryView.setPrimaryViewState(
+                                  showClearButton: false);
+                            }
+                          },
                           decoration: InputDecoration(
                             border: OutlineInputBorder(),
                             hintText: 'Enter a word',
+                            suffixIcon: ref
+                                    .watch(primaryViewController)
+                                    .showClearButton
+                                ? IconButton(
+                                    onPressed: () {
+                                      fetchWordsRepositoryCtrl.word.text = "";
+                                      primaryView.setPrimaryViewState(
+                                          showClearButton: false);
+                                    },
+                                    padding: EdgeInsets.zero,
+                                    icon: Icon(
+                                      Icons.clear,
+                                    ),
+                                  )
+                                : null,
                           ),
                         ),
                       ],
@@ -88,6 +115,7 @@ class PrimaryView extends StatelessWidget {
                         fetchWordsRepositoryCtrl.word.text = "";
                         fetchWordsRepositoryCtrl.language.text = "";
                         dropDownChoice.setValue(null);
+                        primaryView.setPrimaryViewState(showClearButton: false);
                         Navigator.pushNamed(
                             context, StringConstants.resultRoute,
                             arguments: data);
