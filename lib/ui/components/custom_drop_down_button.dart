@@ -43,6 +43,7 @@ class _CustomDropdownButtonState extends State<CustomDropdownButton> {
           }
         },
         validator: widget.validator,
+        autovalidateMode: AutovalidateMode.onUserInteraction,
         items: widget.items.map<DropdownMenuItem<String>>((String value) {
           return DropdownMenuItem<String>(
             value: value,

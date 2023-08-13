@@ -25,3 +25,17 @@ String? getLanguageCode(String language) {
   }
   return null;
 }
+
+Map<String, String> languageCodeToLanguage = {
+  'en_US': 'English (US)',
+  'en_GB': 'English (UK)',
+  'fr': 'French',
+  'de': 'German',
+  'it': 'Italian',
+  'hi': 'Hindi',
+  'ru': 'Russian',
+  'es': 'Spanish',
+  'ko': 'Korean',
+  'ar': 'Arabic',
+  'ja': 'Japanese',
+};

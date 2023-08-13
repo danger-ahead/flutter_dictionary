@@ -1,7 +1,7 @@
 name: flutter_dictionary
 description: Dictionary app using Free Dictionary API.
 
-publish_to: "none" # Remove this line if you wish to publish to pub.dev
+publish_to: "none"
 
 version: 1.1.0+2
 
@@ -18,14 +18,11 @@ dependencies:
   share_plus: ^7.0.2
   http: ^1.1.0
   google_fonts: ^5.1.0
-  connectivity_plus: ^4.0.1
   cached_network_image: ^3.2.3
-  hooks_riverpod: ^2.3.7
-  riverpod_annotation: ^2.1.1
-  riverpod: ^2.3.6
   flutter_riverpod: ^2.3.6
   audioplayers: ^5.0.0
   uuid: ^3.0.7
+  package_info_plus: ^4.1.0
 
 dev_dependencies:
   flutter_test:
@@ -48,4 +45,3 @@ flutter:
 
   assets:
     - images/icon.png
-    - images/no-signal.png

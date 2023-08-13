@@ -57,13 +57,6 @@ class Results extends StatelessWidget {
                         }
                       : null,
                   icon: Icon(Icons.volume_up_rounded)),
-              IconButton(
-                color: Colors.blue,
-                onPressed: () {
-                  // Share.share(data[i].listTile);
-                },
-                icon: Icon(Icons.share),
-              ),
             ],
           ),
           Expanded(
@@ -146,85 +139,3 @@ class Results extends StatelessWidget {
     );
   }
 }
-
-// FutureBuilder(
-//         future: getData(word, language),
-//         builder: (context, snapshot) {
-//           if (snapshot.data == null) {
-//             return Center(child: CircularProgressIndicator());
-//           } else {
-//             var data = (snapshot.data as List<Data>).toList();
-//             return ListView.builder(
-//                 itemCount: data.length,
-//                 itemBuilder: (context, i) {
-//                   return Padding(
-//                     padding: const EdgeInsets.all(10.0),
-//                     child: Card(
-//                       child: Padding(
-//                         padding: const EdgeInsets.all(10.0),
-//                         child: Column(
-//                           crossAxisAlignment: CrossAxisAlignment.start,
-//                           children: [
-//                             Row(
-//                               children: [
-//                                 Expanded(
-//                                   child: Text(data[i].partOfSpeech,
-//                                       textScaleFactor: 1.8,
-//                                       style: GoogleFonts.josefinSans(
-//                                         textStyle: TextStyle(
-//                                             color: Colors.black,
-//                                             fontWeight: FontWeight.bold),
-//                                       )),
-//                                 ),
-//                                 Row(
-//                                   children: [
-//                                     IconButton(
-//                                       color: data[i].audioURL != ''
-//                                           ? Colors.blue
-//                                           : Colors.grey,
-//                                       onPressed: () async {
-//                                         print(data[i].audioURL);
-//                                         final player = AudioPlayer();
-//                                         await player
-//                                             .play(UrlSource(data[i].audioURL));
-//                                       },
-//                                       icon: data[i].audioURL != ''
-//                                           ? Icon(Icons.volume_up_rounded)
-//                                           : Icon(Icons.volume_off_rounded),
-//                                     ),
-//                                     IconButton(
-//                                       color: Colors.blue,
-//                                       onPressed: () {
-//                                         // Share.share(data[i].listTile);
-//                                       },
-//                                       icon: Icon(Icons.share),
-//                                     ),
-//                                   ],
-//                                 ),
-//                               ],
-//                             ),
-//                             Text(
-//                               data[i].definition,
-//                               textScaleFactor: 1.7,
-//                               style: GoogleFonts.bigShouldersText(
-//                                 fontWeight: FontWeight.bold,
-//                               ),
-//                             ),
-//                             Text(
-//                               "Examples:",
-//                               style: GoogleFonts.bigShouldersText(fontSize: 20),
-//                             ),
-//                             Text(data[i].example,
-//                                 style: GoogleFonts.bigShouldersText(
-//                                   fontWeight: FontWeight.bold,
-//                                   fontSize: 16,
-//                                 )),
-//                           ],
-//                         ),
-//                       ),
-//                     ),
-//                   ); //ListTile
-//                 });
-//           }
-//         },
-//       )

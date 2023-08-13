@@ -22,7 +22,7 @@ class WordsRepositoryController extends StateNotifier<bool> {
 
   void deleteSavedWord(WidgetRef ref, PreviousWordsModel word) async {
     try {
-      await WordsRepositoryService.deleteSavedWord(word.id!)
+      await WordsRepositoryService.deleteSavedWord(word.word)
           .whenComplete(() => ref.refresh(saveWordFutureProvider));
     } catch (e) {
       rethrow;

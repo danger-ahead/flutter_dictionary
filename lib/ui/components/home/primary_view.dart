@@ -4,13 +4,10 @@ import 'package:flutter_dictionary/controllers/fetch_words_repository_controller
 import 'package:flutter_dictionary/controllers/primary_view_controller.dart';
 import 'package:flutter_dictionary/providers.dart';
 import 'package:flutter_dictionary/ui/components/custom_drop_down_button.dart';
-import 'package:flutter_dictionary/widgets/no_net.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class PrimaryView extends StatelessWidget {
   PrimaryView({Key? key}) : super(key: key);
-
-  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -28,19 +25,18 @@ class PrimaryView extends StatelessWidget {
             final dropDownChoice = ref.watch(customDropDownProvider);
             final primaryView = ref.watch(primaryViewProvider);
 
-            return Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                ClipRect(
-                  child: Image.asset(
-                    "images/icon.png",
-                    scale: 2,
+            return Form(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  ClipRect(
+                    child: Image.asset(
+                      "images/icon.png",
+                      scale: 2,
+                    ),
                   ),
-                ),
-                Form(
-                  key: _formKey,
-                  child: Padding(
+                  Padding(
                     padding: const EdgeInsets.fromLTRB(10.0, 30.0, 10.0, 10.0),
                     child: Column(
                       children: [
@@ -66,6 +62,7 @@ class PrimaryView extends StatelessWidget {
                             }
                             return null;
                           },
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
                           onChanged: (value) {
                             if (value.isNotEmpty) {
                               primaryView.setPrimaryViewState(
@@ -98,30 +95,63 @@ class PrimaryView extends StatelessWidget {
                       ],
                     ),
                   ),
-                ),
-                ElevatedButton(
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Icon(Icons.search),
-                        Text("Search"),
-                      ],
-                    ),
-                    onPressed: () async {
-                      if (_formKey.currentState!.validate()) {
-                        detectNetStatus(context);
-                        final data =
-                            await fetchWordsRepositoryCtrl.fetchMeaning(ref);
-                        fetchWordsRepositoryCtrl.word.text = "";
-                        fetchWordsRepositoryCtrl.language.text = "";
-                        dropDownChoice.setValue(null);
-                        primaryView.setPrimaryViewState(showClearButton: false);
-                        Navigator.pushNamed(
-                            context, StringConstants.resultRoute,
-                            arguments: data);
-                      }
-                    }),
-              ],
+                  Builder(builder: (context) {
+                    return ElevatedButton(
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Icon(Icons.search),
+                            Text("Search"),
+                          ],
+                        ),
+                        onPressed: () async {
+                          if (Form.of(context).validate()) {
+                            try {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Row(
+                                    children: [
+                                      CircularProgressIndicator(
+                                        color: Colors.white,
+                                      ),
+                                      Padding(
+                                        padding:
+                                            const EdgeInsets.only(left: 10.0),
+                                        child: Text("Loading..."),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              );
+                              final data = await fetchWordsRepositoryCtrl
+                                  .fetchMeaning(ref);
+
+                              ScaffoldMessenger.of(context)
+                                  .hideCurrentSnackBar();
+
+                              fetchWordsRepositoryCtrl.word.clear();
+                              fetchWordsRepositoryCtrl.language.clear();
+                              dropDownChoice.setValue(null);
+                              primaryView.setPrimaryViewState(
+                                  showClearButton: false);
+
+                              Navigator.pushNamed(
+                                  context, StringConstants.resultRoute,
+                                  arguments: data);
+                            } catch (e) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content:
+                                      Text('Something went wrong! Try again'),
+                                  duration: const Duration(seconds: 2),
+                                ),
+                              );
+                            }
+                          }
+                        });
+                  }),
+                ],
+              ),
             );
           })),
         ),
