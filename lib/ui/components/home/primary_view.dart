@@ -127,7 +127,7 @@ class PrimaryView extends StatelessWidget {
                                   .fetchMeaning(ref);
 
                               ScaffoldMessenger.of(context)
-                                  .hideCurrentSnackBar();
+                                  .removeCurrentSnackBar();
 
                               fetchWordsRepositoryCtrl.word.clear();
                               fetchWordsRepositoryCtrl.language.clear();

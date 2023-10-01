@@ -57,7 +57,7 @@ class PreviousWordsView extends StatelessWidget {
                                       .fetchMeaning(ref);
 
                                   ScaffoldMessenger.of(context)
-                                      .hideCurrentSnackBar();
+                                      .removeCurrentSnackBar();
 
                                   Navigator.pushNamed(
                                       context, StringConstants.resultRoute,
