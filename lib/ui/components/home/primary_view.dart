@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dictionary/constants/strings.dart';
 import 'package:flutter_dictionary/controllers/fetch_words_repository_controller.dart';
 import 'package:flutter_dictionary/controllers/primary_view_controller.dart';
+import 'package:flutter_dictionary/exceptions/word_not_found_exception.dart';
+import 'package:flutter_dictionary/models/word_model.dart';
 import 'package:flutter_dictionary/providers.dart';
 import 'package:flutter_dictionary/ui/components/custom_drop_down_button.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -109,6 +111,7 @@ class PrimaryView extends StatelessWidget {
                             try {
                               ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(
+                                  duration: Duration(days: 365),
                                   content: Row(
                                     children: [
                                       CircularProgressIndicator(
@@ -123,11 +126,15 @@ class PrimaryView extends StatelessWidget {
                                   ),
                                 ),
                               );
-                              final data = await fetchWordsRepositoryCtrl
-                                  .fetchMeaning(ref);
+                              final List<WordModel> data =
+                                  await Future.microtask(() =>
+                                      fetchWordsRepositoryCtrl
+                                          .fetchMeaning(ref)).then((data) {
+                                ScaffoldMessenger.of(context)
+                                    .removeCurrentSnackBar();
 
-                              ScaffoldMessenger.of(context)
-                                  .hideCurrentSnackBar();
+                                return data;
+                              });
 
                               fetchWordsRepositoryCtrl.word.clear();
                               fetchWordsRepositoryCtrl.language.clear();
@@ -138,7 +145,17 @@ class PrimaryView extends StatelessWidget {
                               Navigator.pushNamed(
                                   context, StringConstants.resultRoute,
                                   arguments: data);
-                            } catch (e) {
+                            } on WordNotFoundException catch (_) {
+                              ScaffoldMessenger.of(context).clearSnackBars();
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text('Requried word was not found'),
+                                  duration: const Duration(seconds: 2),
+                                ),
+                              );
+                            } catch (_) {
+                              ScaffoldMessenger.of(context)
+                                  .removeCurrentSnackBar();
                               ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(
                                   content:

@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dictionary/constants/strings.dart';
 import 'package:flutter_dictionary/controllers/fetch_words_repository_controller.dart';
 import 'package:flutter_dictionary/controllers/words_repository_controller.dart';
+import 'package:flutter_dictionary/exceptions/word_not_found_exception.dart';
 import 'package:flutter_dictionary/models/previous_words_model.dart';
+import 'package:flutter_dictionary/models/word_model.dart';
 import 'package:flutter_dictionary/providers.dart';
 import 'package:flutter_dictionary/utils/get_language_code.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -53,16 +55,32 @@ class PreviousWordsView extends StatelessWidget {
                                 fetchWordsRepositoryCtrl.language.text =
                                     item.lang;
                                 try {
-                                  final data = await fetchWordsRepositoryCtrl
-                                      .fetchMeaning(ref);
+                                  final List<WordModel> data =
+                                      await Future.microtask(() =>
+                                          fetchWordsRepositoryCtrl
+                                              .fetchMeaning(ref)).then((data) {
+                                    ScaffoldMessenger.of(context)
+                                        .removeCurrentSnackBar();
 
-                                  ScaffoldMessenger.of(context)
-                                      .hideCurrentSnackBar();
+                                    return data;
+                                  });
 
                                   Navigator.pushNamed(
                                       context, StringConstants.resultRoute,
                                       arguments: data);
-                                } catch (e) {
+                                } on WordNotFoundException catch (_) {
+                                  ScaffoldMessenger.of(context)
+                                      .clearSnackBars();
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                      content:
+                                          Text('Requried word was not found'),
+                                      duration: const Duration(seconds: 2),
+                                    ),
+                                  );
+                                } catch (_) {
+                                  ScaffoldMessenger.of(context)
+                                      .clearSnackBars();
                                   ScaffoldMessenger.of(context).showSnackBar(
                                     SnackBar(
                                       content: Text(
