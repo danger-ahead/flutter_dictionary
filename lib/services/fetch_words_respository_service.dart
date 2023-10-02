@@ -1,3 +1,4 @@
+import 'package:flutter_dictionary/exceptions/word_not_found_exception.dart';
 import 'package:flutter_dictionary/models/word_model.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart';
@@ -18,8 +19,11 @@ class FetchWordsRepositoryServiceImpl implements FetchWordsRepositoryService {
     final response = await client.get(Uri.https(
         'api.dictionaryapi.dev', 'api/v2/entries/' + language + '/' + word));
 
-    final data = fromJson(response.body);
-
-    return data;
+    if (response.statusCode == 404) {
+      throw WordNotFoundException();
+    } else {
+      final data = fromJson(response.body);
+      return data;
+    }
   }
 }
