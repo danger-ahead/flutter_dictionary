@@ -124,20 +124,21 @@ class PrimaryView extends StatelessWidget {
                                 ),
                               );
                               final data = await fetchWordsRepositoryCtrl
-                                  .fetchMeaning(ref);
+                                  .fetchMeaning(ref)
+                                  .then((value) {
+                                ScaffoldMessenger.of(context)
+                                    .removeCurrentSnackBar();
 
-                              ScaffoldMessenger.of(context)
-                                  .removeCurrentSnackBar();
+                                fetchWordsRepositoryCtrl.word.clear();
+                                fetchWordsRepositoryCtrl.language.clear();
+                                dropDownChoice.setValue(null);
+                                primaryView.setPrimaryViewState(
+                                    showClearButton: false);
 
-                              fetchWordsRepositoryCtrl.word.clear();
-                              fetchWordsRepositoryCtrl.language.clear();
-                              dropDownChoice.setValue(null);
-                              primaryView.setPrimaryViewState(
-                                  showClearButton: false);
-
-                              Navigator.pushNamed(
-                                  context, StringConstants.resultRoute,
-                                  arguments: data);
+                                Navigator.pushNamed(
+                                    context, StringConstants.resultRoute,
+                                    arguments: value);
+                              });
                             } catch (e) {
                               ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(

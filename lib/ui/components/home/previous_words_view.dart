@@ -54,14 +54,15 @@ class PreviousWordsView extends StatelessWidget {
                                     item.lang;
                                 try {
                                   final data = await fetchWordsRepositoryCtrl
-                                      .fetchMeaning(ref);
+                                      .fetchMeaning(ref)
+                                      .then((value) {
+                                    ScaffoldMessenger.of(context)
+                                        .removeCurrentSnackBar();
 
-                                  ScaffoldMessenger.of(context)
-                                      .removeCurrentSnackBar();
-
-                                  Navigator.pushNamed(
-                                      context, StringConstants.resultRoute,
-                                      arguments: data);
+                                    Navigator.pushNamed(
+                                        context, StringConstants.resultRoute,
+                                        arguments: value);
+                                  });
                                 } catch (e) {
                                   ScaffoldMessenger.of(context).showSnackBar(
                                     SnackBar(
