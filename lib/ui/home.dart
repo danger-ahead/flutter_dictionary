@@ -8,16 +8,37 @@ import 'package:flutter_dictionary/ui/components/home/primary_view.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class Home extends StatelessWidget {
+bool _iconBool = false;
+IconData _iconLight = Icons.light_mode;
+IconData _iconDark = Icons.dark_mode;
+
+class Home extends StatefulWidget {
+  final Function changeTheme;
+  Home({required this.changeTheme});
+
+  @override
+  State<Home> createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Consumer(builder: (context, ref, _) {
       final tabIndex = ref.watch(tabControllerProvider);
-
       return DefaultTabController(
           length: 3,
           child: Scaffold(
             appBar: AppBar(
+              actions: [
+                IconButton(
+                    onPressed: () {
+                      setState(() {
+                        _iconBool = !_iconBool;
+                      });
+                      widget.changeTheme();
+                    },
+                    icon: Icon(_iconBool ? _iconLight : _iconDark))
+              ],
               title: Text(
                 "dictionary",
                 style: GoogleFonts.concertOne(
