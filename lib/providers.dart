@@ -20,9 +20,6 @@ final randomWordsFutureProvider = FutureProvider.autoDispose(
 final packageInfoFutureProvider = FutureProvider.autoDispose((ref) =>
     ref.watch(packageInfoRepositoryController.notifier).getPackageInfo(ref));
 
-final tabControllerProvider =
-    Provider.autoDispose((ref) => ref.watch(tabController.notifier));
-
 final customDropDownProvider =
     Provider.autoDispose((ref) => ref.watch(customDropDownController.notifier));
 
