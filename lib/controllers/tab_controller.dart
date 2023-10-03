@@ -10,4 +10,8 @@ class TabController extends StateNotifier<int> {
   void setTabIndex(int index) {
     state = index;
   }
+
+  int getTabIndex() {
+    return state;
+  }
 }

@@ -14,48 +14,50 @@ class Home extends StatelessWidget {
     return Consumer(builder: (context, ref, _) {
       final tabIndex = ref.watch(tabControllerProvider);
 
-      return DefaultTabController(
-          length: 3,
-          child: Scaffold(
-            appBar: AppBar(
-              title: Text(
-                "dictionary",
-                style: GoogleFonts.concertOne(
-                  fontSize: 26,
-                  letterSpacing: 2.5,
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
-              centerTitle: true,
-              bottom: TabBar(
-                tabs: [
-                  Tab(
-                    icon: Icon(Icons.home),
-                  ),
-                  Tab(
-                    icon: Icon(Icons.history),
-                  ),
-                  Tab(
-                    icon: Icon(Icons.article),
-                  ),
-                ],
-                onTap: (value) {
-                  tabIndex.setTabIndex(value);
-                },
-              ),
+      return Scaffold(
+        appBar: AppBar(
+          title: Text(
+            "dictionary",
+            style: GoogleFonts.concertOne(
+              fontSize: 26,
+              letterSpacing: 2.5,
+              fontWeight: FontWeight.w500,
             ),
-            body: TabBarView(
-              children: [PrimaryView(), PreviousWordsView(), AboutView()],
+          ),
+          centerTitle: true,
+        ),
+        body: IndexedStack(
+          index: tabIndex.getTabIndex(),
+          children: [PrimaryView(), PreviousWordsView(), AboutView()],
+        ),
+        bottomNavigationBar: BottomNavigationBar(
+          onTap: (value) {
+            tabIndex.setTabIndex(value);
+          },
+          items: [
+            BottomNavigationBarItem(
+              icon: Icon(Icons.home),
+              label: 'Home',
             ),
-            floatingActionButton: ref.watch(tabController) == 0
-                ? FloatingActionButton(
-                    onPressed: () {
-                      Navigator.pushNamed(context, StringConstants.randomRoute);
-                    },
-                    child: Icon(Icons.question_mark),
-                  )
-                : null,
-          ));
+            BottomNavigationBarItem(
+              icon: Icon(Icons.history),
+              label: 'Previous',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.article),
+              label: 'About',
+            ),
+          ],
+        ),
+        floatingActionButton: ref.watch(tabController) == 0
+            ? FloatingActionButton(
+          onPressed: () {
+            Navigator.pushNamed(context, StringConstants.randomRoute);
+          },
+          child: Icon(Icons.question_mark),
+        )
+            : null,
+      );
     });
   }
 }
