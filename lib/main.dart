@@ -12,16 +12,30 @@ void main() {
   runApp(SafeArea(child: ProviderScope(child: MyApp())));
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+
+class _MyAppState extends State<MyApp> {
+  bool _isDark = false;
+
+  void _changeTheme() {
+    setState(() {
+      _isDark = !_isDark;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      
       debugShowCheckedModeBanner: false,
-      theme: lightTheme,
-      darkTheme: darkTheme,
+      theme: _isDark ? lightTheme : darkTheme,
       initialRoute: StringConstants.homeRoute,
       routes: {
-        StringConstants.homeRoute: (context) => Home(),
+        StringConstants.homeRoute: (context) => Home(changeTheme: _changeTheme),
         StringConstants.resultRoute: (context) => Results(),
         StringConstants.randomRoute: (context) => RandomResults(),
       },
