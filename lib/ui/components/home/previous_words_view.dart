@@ -161,7 +161,8 @@ class PreviousWordsView extends StatelessWidget {
                   .read(wordsRepositoryController.notifier)
                   .deleteAllSavedWords(ref);
             },
-          )
+          ),
+          SizedBox(height: 5)
         ],
       );
     });

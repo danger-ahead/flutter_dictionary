@@ -28,3 +28,4 @@ final customDropDownProvider =
 
 final primaryViewProvider =
     Provider.autoDispose((ref) => ref.watch(primaryViewController.notifier));
+final navController = StateProvider.autoDispose((ref) => 0);

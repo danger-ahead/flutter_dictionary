@@ -52,9 +52,7 @@ class PrimaryView extends StatelessWidget {
                             },
                             labelText: "Language",
                             controller: fetchWordsRepositoryCtrl.language),
-                        SizedBox(
-                          height: 10.0,
-                        ),
+                        SizedBox(height: 10),
                         TextFormField(
                           controller: fetchWordsRepositoryCtrl.word,
                           textInputAction: TextInputAction.search,
@@ -94,6 +92,7 @@ class PrimaryView extends StatelessWidget {
                                 : null,
                           ),
                         ),
+                        const SizedBox(height: 5),
                       ],
                     ),
                   ),
