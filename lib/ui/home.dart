@@ -31,6 +31,9 @@ class Home extends StatelessWidget {
           children: [PrimaryView(), PreviousWordsView(), AboutView()],
         ),
         bottomNavigationBar: BottomNavigationBar(
+          currentIndex: tabIndex.getTabIndex(),
+          selectedItemColor: Colors.deepPurple,
+          unselectedItemColor: Colors.grey,
           onTap: (value) {
             tabIndex.setTabIndex(value);
           },
