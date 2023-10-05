@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dictionary/constants/strings.dart';
+import 'package:flutter_dictionary/themeprovider.dart';
 import 'package:flutter_dictionary/ui/random_word.dart';
 import 'package:flutter_dictionary/ui/results.dart';
 import 'package:flutter_dictionary/ui/home.dart';
@@ -13,17 +14,22 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        useMaterial3: true,
-      ),
-      initialRoute: StringConstants.homeRoute,
-      routes: {
-        StringConstants.homeRoute: (context) => Home(),
-        StringConstants.resultRoute: (context) => Results(),
-        StringConstants.randomRoute: (context) => RandomResults(),
-      },
-    );
+    return Consumer(builder: (context, ref, _) {
+      final themeNotifier = ref.watch(themeProvider);
+      final themeColor = themeNotifier.value;
+
+      return MaterialApp(
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData.light(useMaterial3: true,),
+        darkTheme: ThemeData.dark(useMaterial3: true),
+        themeMode: themeColor,
+        initialRoute: StringConstants.homeRoute,
+        routes: {
+          StringConstants.homeRoute: (context) => Home(),
+          StringConstants.resultRoute: (context) => Results(),
+          StringConstants.randomRoute: (context) => RandomResults(),
+        },
+      );
+    });
   }
 }

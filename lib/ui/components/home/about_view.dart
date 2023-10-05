@@ -7,7 +7,13 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class AboutView extends StatelessWidget {
+class AboutView extends StatefulWidget {
+  @override
+  State<AboutView> createState() => _AboutViewState();
+}
+
+class _AboutViewState extends State<AboutView> {
+  String dropdownValue = 'System';
   @override
   Widget build(BuildContext context) {
     return Consumer(builder: (context, ref, _) {
@@ -122,7 +128,7 @@ class AboutView extends StatelessWidget {
                   ),
                 ],
               ),
-            )
+            ),
           ],
         ),
       );
