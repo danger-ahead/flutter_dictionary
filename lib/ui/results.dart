@@ -13,12 +13,12 @@ class Results extends StatelessWidget {
     String _phoneticAudio = '', _phoneticText = '';
 
     if (args[0].phonetics != null) {
-      for (int i = 0; i < args[0].phonetics!.length; i++) {
-        if (args[0].phonetics![i].text != null) {
-          _phoneticText = args[0].phonetics![i].text!;
+      for (final phonetic in args[0].phonetics ?? []) {
+        if (phonetic.text != null) {
+          _phoneticText = phonetic.text!;
         }
-        if (args[0].phonetics![i].audio != null) {
-          _phoneticAudio = args[0].phonetics![i].audio!;
+        if (phonetic.audio != null) {
+          _phoneticAudio = phonetic.audio!;
         }
         if (_phoneticAudio != '' && _phoneticText != '') {
           break;
@@ -41,98 +41,200 @@ class Results extends StatelessWidget {
             args[0].word,
             style: GoogleFonts.concertOne(),
           )),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+      body: Stack(
+        fit: StackFit.expand,
         children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              Text(_phoneticText, style: GoogleFonts.josefinSans(fontSize: 18)),
-              IconButton(
-                  color: _phoneticAudio != '' ? Colors.blue : Colors.grey,
-                  onPressed: _phoneticAudio != ''
-                      ? () async {
-                          final player = AudioPlayer();
-                          await player.play(UrlSource(_phoneticAudio));
-                        }
-                      : null,
-                  icon: Icon(Icons.volume_up_rounded)),
-            ],
-          ),
-          Expanded(
-            child: ListView.builder(
-                itemCount: args[0].meanings?.length,
-                itemBuilder: ((context, index) {
-                  final item = args[0].meanings?[index];
+          ListView.builder(
+              itemCount: args[0].meanings?.length,
+              itemBuilder: ((context, index) {
+                final item = args[0].meanings?[index];
 
-                  final String synonyms = item?.synonyms?.join(', ') ?? '';
-                  final String antonyms = item?.antonyms?.join(', ') ?? '';
+                final String synonyms = item?.synonyms?.join(', ') ?? '';
+                final String antonyms = item?.antonyms?.join(', ') ?? '';
 
-                  List<Text> definitions = [];
-                  List<Widget> examples = [];
+                List<Row> definitions = [];
+                List<Widget> examples = [];
 
-                  if (item?.definitions != null) {
-                    final int length = item?.definitions?.length ?? 0;
-                    for (int i = 0; i < length; i++) {
-                      definitions.add(Text(
-                          "${i + 1}. ${item?.definitions?[i].definition}",
-                          style: GoogleFonts.poppins(
-                              fontSize: 16, fontWeight: FontWeight.w500)));
-                      if (item?.definitions?[i].example != null &&
-                          item?.definitions?[i].example != "") {
-                        examples.add(Padding(
-                          padding: const EdgeInsets.only(bottom: 10.0),
-                          child:
-                              Text("Example: ${item?.definitions?[i].example}"),
-                        ));
-                      } else {
-                        examples.add(SizedBox(
-                          height: 10,
-                        ));
-                      }
-                    }
-                  }
-
-                  return Padding(
-                    padding: const EdgeInsets.all(10.0),
-                    child: Column(
+                if (item?.definitions != null) {
+                  final int length = item?.definitions?.length ?? 0;
+                  for (int i = 0; i < length; i++) {
+                    definitions.add(Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          item?.partOfSpeech ?? "",
+                          "${i + 1}. ",
                           style: GoogleFonts.poppins(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 20,
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500,
                           ),
                         ),
-                        synonyms != ""
-                            ? Text("Synonyms: $synonyms",
-                                style: GoogleFonts.poppins())
-                            : SizedBox.shrink(),
-                        antonyms != ""
-                            ? Text("Antonyms: $antonyms",
-                                style: GoogleFonts.poppins())
-                            : SizedBox.shrink(),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 10.0),
+                        Expanded(
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              for (int i = 0; i < definitions.length; i++)
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    definitions[i],
-                                    examples[i],
-                                  ],
-                                ),
+                              Text(
+                                "${item?.definitions?[i].definition}",
+                                style: GoogleFonts.poppins(
+                                    fontSize: 16, fontWeight: FontWeight.w500),
+                              ),
+                              (item?.definitions?[i].example != null &&
+                                      item?.definitions?[i].example != "")
+                                  ? Padding(
+                                      padding:
+                                          const EdgeInsets.only(bottom: 10.0),
+                                      child: Text(
+                                          "Example: ${item?.definitions?[i].example}"),
+                                    )
+                                  : SizedBox(
+                                      height: 10,
+                                    )
                             ],
                           ),
                         ),
                       ],
+                    ));
+                    if (item?.definitions?[i].example != null &&
+                        item?.definitions?[i].example != "") {
+                      examples.add(Padding(
+                        padding: const EdgeInsets.only(bottom: 10.0),
+                        child:
+                            Text("Example: ${item?.definitions?[i].example}"),
+                      ));
+                    } else {
+                      examples.add(SizedBox(
+                        height: 10,
+                      ));
+                    }
+                  }
+                }
+
+                return Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: Card(
+                    color: Colors.white,
+                    child: Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            item?.partOfSpeech ?? "",
+                            style: GoogleFonts.poppins(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20,
+                            ),
+                          ),
+                          Container(
+                            margin: EdgeInsets.symmetric(vertical: 5),
+                            decoration: BoxDecoration(
+                              border: Border.all(color: Colors.grey),
+                              borderRadius: BorderRadius.circular(5),
+                            ),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                synonyms != ""
+                                    ? Container(
+                                        padding: EdgeInsets.all(5),
+                                        child: synonyms != ""
+                                            ? Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Text(
+                                                    "Synonyms:",
+                                                    style: GoogleFonts.poppins(
+                                                        fontWeight:
+                                                            FontWeight.w500,
+                                                        decoration:
+                                                            TextDecoration
+                                                                .underline),
+                                                  ),
+                                                  Text(
+                                                    synonyms,
+                                                    style:
+                                                        GoogleFonts.poppins(),
+                                                  ),
+                                                ],
+                                              )
+                                            : SizedBox.shrink(),
+                                      )
+                                    : SizedBox.shrink(),
+                                antonyms != ""
+                                    ? Container(
+                                        padding: EdgeInsets.all(5),
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              "Antonyms:",
+                                              style: GoogleFonts.poppins(
+                                                fontWeight: FontWeight.w500,
+                                                decoration:
+                                                    TextDecoration.underline,
+                                              ),
+                                            ),
+                                            Text(
+                                              "$antonyms",
+                                              style: GoogleFonts.poppins(),
+                                            )
+                                          ],
+                                        ),
+                                      )
+                                    : SizedBox.shrink(),
+                              ],
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(top: 10.0),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                for (int i = 0; i < definitions.length; i++)
+                                  Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      definitions[i],
+                                    ],
+                                  ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
-                  );
-                })),
+                  ),
+                );
+              })),
+          Positioned(
+            right: 20,
+            bottom: 20,
+            child: PhysicalModel(
+              color: Colors.white,
+              elevation: 5,
+              borderRadius: BorderRadius.circular(50),
+              child: Padding(
+                padding: const EdgeInsets.only(right: 5, left: 10),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Text(_phoneticText,
+                        style: GoogleFonts.josefinSans(fontSize: 18)),
+                    IconButton(
+                        color: _phoneticAudio != '' ? Colors.blue : Colors.grey,
+                        onPressed: _phoneticAudio != ''
+                            ? () async {
+                                final player = AudioPlayer();
+                                await player.play(UrlSource(_phoneticAudio));
+                              }
+                            : null,
+                        icon: Icon(Icons.volume_up_rounded)),
+                  ],
+                ),
+              ),
+            ),
           ),
         ],
       ),
