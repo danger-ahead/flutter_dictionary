@@ -20,6 +20,7 @@ dependencies:
   google_fonts: ^5.1.0
   cached_network_image: ^3.2.3
   flutter_riverpod: ^2.4.1
+  shared_preferences: ^2.2.1
   audioplayers: ^5.0.0
   uuid: ^3.0.7
   package_info_plus: ^4.1.0

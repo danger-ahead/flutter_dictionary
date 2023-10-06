@@ -22,13 +22,23 @@ class CustomDropdownButton extends StatefulWidget {
 }
 
 class _CustomDropdownButtonState extends State<CustomDropdownButton> {
+  static const languageKey = "language";
   @override
   Widget build(BuildContext context) {
     return Consumer(builder: (context, ref, _) {
       final dropDownChoice = ref.watch(customDropDownProvider);
 
       return DropdownButtonFormField<String>(
-        value: ref.watch(customDropDownController),
+        value: ref.watch(sharedPreference).when(
+            data: (data) {
+              var language = data.getString(languageKey);
+              if(language != null) {
+                widget.controller?.text = getLanguageCode(language)!;
+              }
+              return language;
+            },
+            error: (error, trace) => null,
+            loading: () => null),
         isDense: true,
         decoration: InputDecoration(
           border: OutlineInputBorder(),
@@ -37,6 +47,12 @@ class _CustomDropdownButtonState extends State<CustomDropdownButton> {
         onChanged: (String? newValue) {
           if (newValue != null) {
             dropDownChoice.setValue(newValue);
+            ref.watch(sharedPreference).when(
+                data: (data) {
+                  data.setString(languageKey, newValue);
+                },
+                error: (error, trace) => {},
+                loading: () => {});
             if (widget.controller != null) {
               widget.controller?.text = getLanguageCode(newValue)!;
             }
