@@ -135,12 +135,6 @@ class PrimaryView extends StatelessWidget {
                                 return data;
                               });
 
-                              fetchWordsRepositoryCtrl.word.clear();
-                              fetchWordsRepositoryCtrl.language.clear();
-                              dropDownChoice.setValue(null);
-                              primaryView.setPrimaryViewState(
-                                  showClearButton: false);
-
                               Navigator.pushNamed(
                                   context, StringConstants.resultRoute,
                                   arguments: data);
