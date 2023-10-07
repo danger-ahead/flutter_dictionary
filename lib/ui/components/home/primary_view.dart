@@ -60,8 +60,8 @@ class PrimaryView extends StatelessWidget {
                             if (value == null || value.isEmpty) {
                               return 'Please enter a word';
                             }
-                            var reg = RegExp(r'[\d+?@!#$%^&*()_+-=~`.,<>{}\[\]:;"\\|]+');
-                            if(reg.hasMatch(value)){
+                            var pattern = RegExp(r'[\d+?@!#$%^&*()_+-=~`.,<>{}\[\]:;"\\|]+');
+                            if(pattern.hasMatch(value)){
                               return 'Please enter valid word';
                             }
                             return null;
