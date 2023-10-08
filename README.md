@@ -14,7 +14,8 @@ Flutter Dictionary is a mobile app that allows you to search for the meanings of
 | *Search History Screen* | *Home Screen* | *Defnition Screen* |
 
 - Now Have Error Animation
-![Error Animation](images/Error_Preview.gif)
+
+<img width="250" height="500" src="images/Error_Preview.gif" alt="Error Animation" /> 
 
 ## Installation
 
