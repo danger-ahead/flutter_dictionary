@@ -8,7 +8,8 @@ class themeNotifier extends ChangeNotifier {
   ThemeMode _value = ThemeMode.light;
   ThemeMode get value => _value;
 
-  void setDark() {
+  void setDark() async {
+    await Fluttertoast.cancel();
     _value = ThemeMode.dark;
     Fluttertoast.showToast(
         msg: "Theme Set to Dark Mode",
@@ -20,7 +21,8 @@ class themeNotifier extends ChangeNotifier {
     notifyListeners();
   }
 
-  void setLight() {
+  void setLight() async {
+    await Fluttertoast.cancel();
     _value = ThemeMode.light;
     Fluttertoast.showToast(
         msg: "Theme Set to Light Mode",
@@ -32,7 +34,8 @@ class themeNotifier extends ChangeNotifier {
     notifyListeners();
   }
 
-  void setSystem() {
+  void setSystem() async {
+    await Fluttertoast.cancel();
     _value = ThemeMode.system;
     Fluttertoast.showToast(
         msg: "Theme Set to System Mode",
