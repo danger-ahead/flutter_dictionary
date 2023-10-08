@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dictionary/providers.dart';
+import 'package:flutter_dictionary/themeprovider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:lottie/lottie.dart';
 import 'package:share_plus/share_plus.dart';
 
 class RandomResults extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Consumer(builder: (context, ref, _) {
+      final appTheme = ref.watch(themeProvider);
+      var sysTheme = MediaQuery.platformBrightnessOf(context);
       return Scaffold(
           appBar: AppBar(
               leading: IconButton(
@@ -89,11 +93,23 @@ class RandomResults extends StatelessWidget {
                       )),
                 loading: () => Center(child: CircularProgressIndicator()),
                 error: (error, stackTrace) => Center(
-                  child: Text(
-                    "Error :(",
-                    style: GoogleFonts.poppins(),
-                  ),
-                ),
+                    child: Column(
+                  children: [
+                    SizedBox(height: MediaQuery.sizeOf(context).height / 10),
+                    appTheme.value == ThemeMode.dark
+                        ? Lottie.asset('animation/ErrorAnimationDark.json')
+                        : appTheme.value == ThemeMode.light
+                            ? Lottie.asset('animation/ErrorAnimationLight.json')
+                            : sysTheme == Brightness.light
+                                ? Lottie.asset(
+                                    'animation/ErrorAnimationLight.json')
+                                : Lottie.asset(
+                                    'animation/ErrorAnimationDark.json'),
+                    SizedBox(height: MediaQuery.sizeOf(context).height / 30),
+                    Text("Sorry! Something Went Wrong :(",
+                        style: GoogleFonts.poppins(fontSize: 22))
+                  ],
+                )),
               ));
     });
   }
