@@ -25,6 +25,7 @@ dependencies:
   uuid: ^3.0.7
   package_info_plus: ^4.1.0
   fluttertoast: ^8.1.1
+  lottie: ^2.6.0
 
 
 dev_dependencies:
@@ -48,3 +49,4 @@ flutter:
 
   assets:
     - images/icon.png
+    - animation/
