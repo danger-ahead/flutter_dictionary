@@ -13,6 +13,10 @@ Flutter Dictionary is a mobile app that allows you to search for the meanings of
 | :---: | :---: | :---: |
 | *Search History Screen* | *Home Screen* | *Defnition Screen* |
 
+- Now Have Error Animation
+
+<img width="250" height="500" src="images/Error_Preview.gif" alt="Error Animation" /> 
+
 ## Installation
 
 To run this app, you need to have Flutter installed on your machine. Then, clone this repository and navigate to the project folder. Run the following commands to install the dependencies and launch the app:
