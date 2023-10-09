@@ -9,7 +9,15 @@ Flutter Dictionary is a mobile app that allows you to search for the meanings of
 - Save words to your favorites list
 - View your search history
 
-| ![Screenshot](images/Screenshot2.png) | ![Screenshot](images/Screenshot1.png) | ![Screenshot](images/Screenshot3.png) |
+### Screenshots
+
+| ![Screenshot](images/history_screen.jpeg) | ![Screenshot](images/home_screen.jpeg) | ![Screenshot](images/result_screen.jpeg) |
+| :---: | :---: | :---: |
+| *Search History Screen* | *Home Screen* | *Defnition Screen* |
+
+- Dark mode
+
+| ![Screenshot](images/history_screen(dark).jpeg) | ![Screenshot](images/home_screen(dark).jpeg) | ![Screenshot](images/result_screen(dark).jpeg) |
 | :---: | :---: | :---: |
 | *Search History Screen* | *Home Screen* | *Defnition Screen* |
 
