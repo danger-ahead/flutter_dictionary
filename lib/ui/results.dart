@@ -56,6 +56,8 @@ class Results extends StatelessWidget {
           fit: StackFit.expand,
           children: [
             ListView.builder(
+                physics: BouncingScrollPhysics(
+                  decelerationRate: ScrollDecelerationRate.fast),
                 itemCount: args[0].meanings?.length,
                 itemBuilder: ((context, index) {
                   final item = args[0].meanings?[index];
@@ -93,13 +95,13 @@ class Results extends StatelessWidget {
                                     item?.definitions?[i].example != "")
                                     ? Padding(
                                   padding:
-                                  const EdgeInsets.only(bottom: 10.0),
+                                  const EdgeInsets.only(bottom: 12.0),
                                   child: Text(
                                       "Example: ${item?.definitions?[i]
                                           .example}"),
                                 )
                                     : SizedBox(
-                                  height: 10,
+                                  height: 12,
                                 )
                               ],
                             ),
