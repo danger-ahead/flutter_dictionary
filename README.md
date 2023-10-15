@@ -13,13 +13,13 @@ Flutter Dictionary is a mobile app that allows you to search for the meanings of
 
 | ![Screenshot](images/history_screen.jpeg) | ![Screenshot](images/home_screen.jpeg) | ![Screenshot](images/result_screen.jpeg) |
 | :---: | :---: | :---: |
-| *Search History Screen* | *Home Screen* | *Defnition Screen* |
+| *Search History Screen* | *Home Screen* | *Definition Screen* |
 
 - Dark mode
 
 | ![Screenshot](images/history_screen(dark).jpeg) | ![Screenshot](images/home_screen(dark).jpeg) | ![Screenshot](images/result_screen(dark).jpeg) |
 | :---: | :---: | :---: |
-| *Search History Screen* | *Home Screen* | *Defnition Screen* |
+| *Search History Screen* | *Home Screen* | *Definition Screen* |
 
 - Now Have Error Animation
 
