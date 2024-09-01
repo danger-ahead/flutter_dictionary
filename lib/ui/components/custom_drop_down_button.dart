@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_dictionary/controllers/custom_drop_down_controller.dart';
 import 'package:flutter_dictionary/providers.dart';
 import 'package:flutter_dictionary/utils/get_language_code.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -32,7 +31,7 @@ class _CustomDropdownButtonState extends State<CustomDropdownButton> {
         value: ref.watch(sharedPreference).when(
             data: (data) {
               var language = data.getString(languageKey);
-              if(language != null) {
+              if (language != null) {
                 widget.controller?.text = getLanguageCode(language)!;
               }
               return language;

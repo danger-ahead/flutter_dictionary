@@ -83,7 +83,7 @@ class _AboutViewState extends State<AboutView> {
               ),
             ),
             Card(
-              child: ButtonBar(
+              child: OverflowBar(
                 alignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   IconButton(

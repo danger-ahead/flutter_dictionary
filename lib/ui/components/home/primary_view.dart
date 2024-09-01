@@ -24,7 +24,7 @@ class PrimaryView extends StatelessWidget {
             final fetchWordsRepositoryCtrl =
                 ref.watch(fetchWordsRepositoryController.notifier);
 
-            final dropDownChoice = ref.watch(customDropDownProvider);
+            // final dropDownChoice = ref.watch(customDropDownProvider);
             final primaryView = ref.watch(primaryViewProvider);
 
             return Form(
@@ -60,8 +60,9 @@ class PrimaryView extends StatelessWidget {
                             if (value == null || value.isEmpty) {
                               return 'Please enter a word';
                             }
-                            var pattern = RegExp(r'[\d+?@!#$%^&*()_+-=~`.,<>{}\[\]:;"\\|]+');
-                            if(pattern.hasMatch(value)){
+                            var pattern = RegExp(
+                                r'[\d+?@!#$%^&*()_+-=~`.,<>{}\[\]:;"\\|]+');
+                            if (pattern.hasMatch(value)) {
                               return 'Please enter valid word';
                             }
                             return null;
